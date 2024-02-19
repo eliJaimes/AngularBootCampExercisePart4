@@ -60,3 +60,12 @@ npx tailwindcss init
 - Add the @tailwind directives for each of Tailwind's layers to your ./src/styles.css file
 - Get rid of 'src\app\app.component.scss' and the reference from 'styleUrl' property on AppComponent, we will try to only use TW for our styles.
 - Note: Tailwind can be use along with SCSS, on certain scenarios the combination of both approaches can be quite powerful
+
+## Configure our theme in Tailwind
+
+https://tailwindcss.com/docs/theme
+
+- We will limit our theme colors to Angular Material Colors
+- We want to use the Tailwind's slate pallete so we will import it
+
+https://tailwindcss.com/docs/customizing-colors#using-the-default-colors
