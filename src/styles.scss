@@ -1,5 +1,9 @@
 // ••[1]••••••••••••••••••••••••• styles.scss •••••••••••••••••••••••••••••• //
 
+/* stylelint-disable selector-no-qualifying-type */
+
+/* stylelint-disable color-no-hex */
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 
@@ -12,35 +16,163 @@
 
 @include mat.core();
 
+// Apex brand color #465569
+// Apex accent color #A5E3D8
+
+// MATERIAL DESIGN PALETTE GENERATOR
+// http://mcg.mbitson.com/#!?mcgpalette0=%23465569
+
+// Note: use Angular Js 2 (Material 2)
+
+
+$apex-primary-palette: (50 : #e9ebed,
+	100 : #c8ccd2,
+	200 : #a3aab4,
+	300 : #7e8896,
+	400 : #626f80,
+	500 : #465569,
+	600 : #3f4e61,
+	700 : #374456,
+	800 : #2f3b4c,
+	900 : #202a3b,
+	A100 : #81b0ff,
+	A200 : #4e90ff,
+	A400 : #1b71ff,
+	A700 : #0261ff,
+	contrast: (50 : #000,
+		100 : #000,
+		200 : #000,
+		300 : #000,
+		400 : #fff,
+		500 : #fff,
+		600 : #fff,
+		700 : #fff,
+		800 : #fff,
+		900 : #fff,
+		A100 : #000,
+		A200 : #000,
+		A400 : #fff,
+		A700 : #fff,
+	));
+
+$apex-accent-palette: (50 : #f4fcfa,
+	100 : #e4f7f3,
+	200 : #d2f1ec,
+	300 : #c0ebe4,
+	400 : #b3e7de,
+	500 : #a5e3d8,
+	600 : #9de0d4,
+	700 : #93dcce,
+	800 : #8ad8c8,
+	900 : #79d0bf,
+	A100 : #fff,
+	A200 : #fff,
+	A400 : #ecfffb,
+	A700 : #d3fff6,
+	contrast: (50 : #000,
+		100 : #000,
+		200 : #000,
+		300 : #000,
+		400 : #000,
+		500 : #000,
+		600 : #000,
+		700 : #000,
+		800 : #000,
+		900 : #000,
+		A100 : #000,
+		A200 : #000,
+		A400 : #000,
+		A700 : #000,
+	));
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$ExercisePart4-primary: mat.define-palette(mat.$indigo-palette);
-$ExercisePart4-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$exercise-part4-light-primary: mat.define-palette($apex-primary-palette);
+$exercise-part4-dark-primary: mat.define-palette($apex-primary-palette, A100);
+
+$exercise-part4-accent: mat.define-palette($apex-accent-palette);
 
 // The warn palette is optional (defaults to red).
-$ExercisePart4-warn: mat.define-palette(mat.$red-palette);
+$exercise-part4-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$ExercisePart4-theme: mat.define-light-theme((color: (primary: $ExercisePart4-primary,
-			accent: $ExercisePart4-accent,
-			warn: $ExercisePart4-warn,
+$exercise-part4-light-theme: mat.define-light-theme((color: (primary: $exercise-part4-light-primary,
+			accent: $exercise-part4-accent,
+			warn: $exercise-part4-warn,
+		)));
+
+$exercise-part4-dark-theme: mat.define-dark-theme((color: (primary: $exercise-part4-dark-primary,
+			accent: $exercise-part4-accent,
+			warn: $exercise-part4-warn,
 		)));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
-@include mat.all-component-themes($ExercisePart4-theme);
+@include mat.all-component-typographies();
 
-// ••[1]••••••••••••••••••••••••• styles.scss •••••••••••••••••••••••••••••• //
+@include mat.all-component-themes($exercise-part4-light-theme);
+
 html,
 body {
 	height: 100%;
 }
 
 body {
+	--divider: #{mat.get-theme-color($exercise-part4-light-theme, foreground, divider)};
+	--primary: #{mat.get-theme-color($exercise-part4-light-theme, primary, default)};
+	--accent: #{mat.get-theme-color($exercise-part4-light-theme, accent, default)};
+	--warn: #{mat.get-theme-color($exercise-part4-light-theme, warn, default)};
+	--scrollbar-button: var(--primary);
+	--scrollbar-track-piece : #{rgba(mat.get-theme-color($exercise-part4-light-theme, primary, default), .20)};
+	--scrollbar-thumb : #{rgba(mat.get-theme-color($exercise-part4-light-theme, accent, default), .30)};
+	background: mat.get-theme-color($exercise-part4-light-theme, background, background);
 	font-family: Roboto, "Helvetica Neue", sans-serif;
 	margin: 0;
+
+
+	// ••[2]•••••••••• Scrollbar •••••••••••••••//
+	::-webkit-scrollbar,
+	&::-webkit-scrollbar {
+		height: 6px;
+		width: 6px;
+	}
+
+	// Button up, button down
+	::-webkit-scrollbar-button,
+	&::-webkit-scrollbar-button {
+		background: var(--scrollbar-button);
+		cursor: pointer;
+	}
+
+	// All the track
+	::-webkit-scrollbar-track-piece,
+	&::-webkit-scrollbar-track-piece {
+		background: var(--scrollbar-track-piece);
+	}
+
+	// Indicator
+	::-webkit-scrollbar-thumb,
+	&::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-thumb);
+	}
+
+
+	&.dark {
+		--divider: #{mat.get-theme-color($exercise-part4-dark-theme, foreground, divider)};
+		--primary: #{mat.get-theme-color($exercise-part4-dark-theme, primary, default)};
+		--accent: #{mat.get-theme-color($exercise-part4-dark-theme, accent, default)};
+		--warn: #{mat.get-theme-color($exercise-part4-dark-theme, warn, default)};
+		--scrollbar-button: var(--primary);
+		--scrollbar-track-piece : #{rgba(mat.get-theme-color($exercise-part4-dark-theme, primary, default), .20)};
+		--scrollbar-thumb : #{rgba(mat.get-theme-color($exercise-part4-dark-theme, accent, default), .30)};
+
+		@include mat.all-component-colors($exercise-part4-dark-theme);
+		background: mat.get-theme-color($exercise-part4-dark-theme, background, background);
+		color: mat.get-theme-color($exercise-part4-dark-theme, foreground, text);
+	}
+	;
 }

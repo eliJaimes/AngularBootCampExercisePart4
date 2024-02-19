@@ -29,3 +29,16 @@ ng add @angular/material --dry-run
 ```
 
 - This time 'Roboto' font was include by Angular Material
+
+## Update Angular Material custom theme
+
+https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colors
+
+- On 'src\styles.scss' update theme variables name
+- '@include mat.all-component-typographies();' rule
+- Change the primary color
+- Extend the configuration to provide a dark theme
+- Manually set the background according to the theme
+- Include scroll customization rules
+
+https://material.angular.io/guide/theming-your-components
