@@ -9,3 +9,9 @@ ng new ExercisePart4 --skip-tests --dry-run
 ```
 
 https://angular.io/cli
+
+## Do clean up
+
+- Sort imports
+- Clean app.component.\* files
+- Remove unnecessary editor files
