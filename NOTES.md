@@ -42,3 +42,21 @@ https://m2.material.io/design/color/the-color-system.html#tools-for-picking-colo
 - Include scroll customization rules
 
 https://material.angular.io/guide/theming-your-components
+
+## Install and wire TailwindCss
+
+https://tailwindcss.com/
+
+- We can follow the installation guide https://tailwindcss.com/docs/guides/angular
+
+- Install tailwindcss via npm, and then run the init command to generate a tailwind.config.js file
+
+```shell
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+```
+
+- Add the paths to all of your template files in your tailwind.config.js file
+- Add the @tailwind directives for each of Tailwind's layers to your ./src/styles.css file
+- Get rid of 'src\app\app.component.scss' and the reference from 'styleUrl' property on AppComponent, we will try to only use TW for our styles.
+- Note: Tailwind can be use along with SCSS, on certain scenarios the combination of both approaches can be quite powerful
