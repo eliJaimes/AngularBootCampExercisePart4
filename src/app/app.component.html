@@ -1,15 +1,17 @@
 <!-- ••[1]••••••••••••••••••••••••• app.component.html •••••••••••••••••••••••••••••• -->
 
-<mat-toolbar color="primary">
-  <span class="flex-1">{{ titleLabel }}</span>
-  <mat-slide-toggle
-    color="primary"
-    checked
-    hideIcon
-    labelPosition="before"
-    (change)="themeChangeHandler($event)"
-    >{{ themeToggleLabel }}
-  </mat-slide-toggle>
-</mat-toolbar>
+<div class="app-root pb-5">
+  <mat-toolbar color="primary">
+    <span class="flex-1">{{ titleLabel }}</span>
+    <mat-slide-toggle
+      color="primary"
+      checked
+      hideIcon
+      labelPosition="before"
+      (change)="themeChangeHandler($event)"
+      >{{ themeToggleLabel }}
+    </mat-slide-toggle>
+  </mat-toolbar>
 
-<app-resume-form />
+  <app-resume-form />
+</div>

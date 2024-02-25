@@ -104,3 +104,8 @@ https://material.angular.io/components/slide-toggle/overview
 - Extend our toolbar component to include our switch theme toggle
 - Configure the toggle with some options
 - Inject the Renderer2 class to manipulate DOM elements
+
+## Create ResumeForm component outer layout
+
+- Note: it might be a good practice to use the components selector name as a a class wrapper for the components
+- Use Tailwind's utility classes to style App and ResumeForm components
