@@ -69,3 +69,9 @@ https://tailwindcss.com/docs/theme
 - We want to use the Tailwind's slate pallete so we will import it
 
 https://tailwindcss.com/docs/customizing-colors#using-the-default-colors
+
+## Define application requirements and outputs
+
+- We included the file 'src\assets\desiredOutput.json' which is the required output as a json structure that will be rendered for an external endpoint as a Pdf resume
+- We created the file 'enhancedOutput.json', which is a similar structure as 'desiredOutput.json' but allows more that 1 education option and flattens the skills matrix as an skills array. Adjust some nouns to its plural version.
+- We can start creating some entities (types or interfaces) out of this, so out application is strongly typed
