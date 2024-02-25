@@ -182,3 +182,11 @@ body {
 @tailwind components;
 
 @tailwind utilities;
+
+
+@layer components {
+	.fieldset {
+
+		@apply border border-slate-500 p-4 rounded-md;
+	}
+}

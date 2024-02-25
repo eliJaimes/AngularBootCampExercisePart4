@@ -148,3 +148,13 @@ https://material.angular.io/components/tooltip/overview
 ## Reflect the ResumeForm profile piece on the UI
 
 - Wire the description field
+
+## Refactor to isolate Tailwind custom classes
+
+https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
+
+- Let's isolate the utility classes applied to the fieldset element
+
+https://tailwindcss.com/docs/adding-custom-styles#writing-plugins
+
+- Let's isolate the utility classes applied to the legend element
