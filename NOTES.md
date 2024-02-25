@@ -87,3 +87,11 @@ ng generate component components/resumeForm --module home --skip-tests --style n
 - Import ResumeFormComponent on AppComponent imports array
 - Use ResumeFormComponent on AppComponent template
 - Change the page tile and favicon
+
+## Create application outer layout
+
+https://material.angular.io/components/toolbar/overview
+
+- Let's create the application outer layout using some Angular Material components
+- Import MatToolbarModule on AppComponent, using the imports array
+- We will set the page title dynamically so we can have consistency
