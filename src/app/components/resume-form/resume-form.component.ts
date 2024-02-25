@@ -3,6 +3,11 @@
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { ContactT } from '../../entities/resumeForm.type';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 type ContactFormGroupT = FormGroup<{
   name: FormControl<ContactT['name'] | null>;
@@ -14,12 +19,29 @@ type ResumeFormGroupT = FormGroup<{
 }>;
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+  ],
   selector: 'app-resume-form',
   standalone: true,
   templateUrl: './resume-form.component.html',
 })
 export class ResumeFormComponent {
+  /* ••[2]•••••••••• Labels ••••••••••••••• */
+
+  protected clearLabel: string = 'Clear';
+
+  /* ••[3]••••• Contact •••••••••• */
+
+  protected contactLabel: string = 'Contact';
+  protected contactNameLabel: string = 'Name';
+  protected contactTitleLabel: string = 'Title';
+
   protected resumeForm: ResumeFormGroupT = new FormGroup({
     contact: new FormGroup({
       name: new FormControl(''),

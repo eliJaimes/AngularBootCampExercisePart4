@@ -1,5 +1,50 @@
 <!-- ••[1]••••••••••••••••••••••••• resume-form.component.html •••••••••••••••••••••••••••••• -->
 
-<div
-  class="app-resume-form m-10 border-2 border-primary rounded-md p-8 shadow-lg shadow-primary"
-></div>
+<div class="app-resume-form">
+  <form
+    class="m-10 border-2 border-primary rounded-md p-6 shadow-lg shadow-primary"
+    [formGroup]="resumeForm"
+  >
+    <!-- Contact -->
+    <fieldset
+      class="border border-slate-500 p-4 rounded-md"
+      formGroupName="contact"
+    >
+      <legend class="uppercase font-semibold text-accent px-2 text-base">
+        {{ contactLabel }}
+      </legend>
+      <!-- Name -->
+      <mat-form-field class="w-full" color="primary">
+        <mat-label>{{ contactNameLabel }}</mat-label>
+        <input matInput type="text" formControlName="name" #contactNameRef />
+        @if (contactNameRef.value) {
+        <button
+          matSuffix
+          mat-icon-button
+          matTooltip="{{ clearLabel }}"
+          matTooltipPosition="above"
+          (click)="contactNameRef.value = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+      <!-- Title -->
+      <mat-form-field class="w-full" color="primary">
+        <mat-label>{{ contactTitleLabel }}</mat-label>
+        <input matInput type="text" formControlTitle="title" #contactTitleRef />
+        @if (contactTitleRef.value) {
+        <button
+          matSuffix
+          mat-icon-button
+          matTooltip="{{ clearLabel }}"
+          matTooltipPosition="above"
+          (click)="contactTitleRef.value = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+    </fieldset>
+  </form>
+</div>

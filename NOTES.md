@@ -123,3 +123,19 @@ https://material.angular.io/components/slide-toggle/overview
 ## Improve strong typing mechanism
 
 - We should reuse and consider our main source of truth when we define types, so lets update our internal ResumeFormComponent typing definition
+
+## Reflect the ResumeForm contact piece on the UI
+
+https://material.angular.io/components/button/overview
+https://material.angular.io/components/form-field/overview
+https://material.angular.io/components/icon/overview
+https://material.angular.io/components/input/overview
+https://material.angular.io/components/tooltip/overview
+
+- Import MatButtonModule on AppComponent
+- Import MatIconModule on AppComponent
+- Import MatInputModule on AppComponent
+- Import MatSlideToggleModule on AppComponent
+- Import MatTooltipModule on AppComponent
+- Add a MatFormField with a MatInput and wire the name and title fields
+- Add a formGroup directive on form element and wire the resumeForm property
