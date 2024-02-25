@@ -35,6 +35,7 @@ export class ResumeFormComponent {
   /* ••[2]•••••••••• Labels ••••••••••••••• */
 
   protected clearLabel: string = 'Clear';
+  protected submitLabel: string = 'Submit';
 
   /* ••[3]••••• Contact •••••••••• */
 
@@ -48,4 +49,11 @@ export class ResumeFormComponent {
       title: new FormControl(''),
     }),
   });
+
+  protected onSubmit(event: SubmitEvent, form: ResumeFormGroupT): void {
+    console.log('%c\nonSubmit', 'color: SpringGreen');
+    console.log('event: %O', event);
+    console.log('form: %O', form);
+    console.log('this.resumeForm: %O', this.resumeForm);
+  }
 }

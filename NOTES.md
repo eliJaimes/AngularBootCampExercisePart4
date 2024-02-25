@@ -139,3 +139,8 @@ https://material.angular.io/components/tooltip/overview
 - Import MatTooltipModule on AppComponent
 - Add a MatFormField with a MatInput and wire the name and title fields
 - Add a formGroup directive on form element and wire the resumeForm property
+
+## Add form actions
+
+- Create a new section to add some form actions buttons
+- Add the ngSubmit event
