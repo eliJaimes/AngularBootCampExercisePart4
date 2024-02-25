@@ -115,3 +115,7 @@ https://material.angular.io/components/slide-toggle/overview
 - Get rid of the lorem ipsum text
 - Import ReactiveFormsModule on ResumeFormComponent, using the imports array
 - Define a resumeForm property and use FormGroup and FormControl classes to define the structure of the ResumeForm contact piece
+
+## Create a proper strong typing mechanism
+
+- Create some helper type that we can reuse ResumeFormComponent
