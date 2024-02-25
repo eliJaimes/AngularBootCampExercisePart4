@@ -95,3 +95,12 @@ https://material.angular.io/components/toolbar/overview
 - Let's create the application outer layout using some Angular Material components
 - Import MatToolbarModule on AppComponent, using the imports array
 - We will set the page title dynamically so we can have consistency
+
+## Add switch theme logic
+
+https://material.angular.io/components/slide-toggle/overview
+
+- Import MatSlideToggleModule on AppComponent, using the imports array
+- Extend our toolbar component to include our switch theme toggle
+- Configure the toggle with some options
+- Inject the Renderer2 class to manipulate DOM elements
