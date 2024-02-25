@@ -144,3 +144,7 @@ https://material.angular.io/components/tooltip/overview
 
 - Create a new section to add some form actions buttons
 - Add the ngSubmit event
+
+## Reflect the ResumeForm profile piece on the UI
+
+- Wire the description field

@@ -1,8 +1,8 @@
 /* ••[1]••••••••••••••••••••••••• resume-form.component.ts •••••••••••••••••••••••••••••• */
 
+import { ContactT, ProfileT } from '../../entities/resumeForm.type';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { ContactT } from '../../entities/resumeForm.type';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,8 +14,13 @@ type ContactFormGroupT = FormGroup<{
   title: FormControl<ContactT['title'] | null>;
 }>;
 
+type ProfileFormGroupT = FormGroup<{
+  description: FormControl<ProfileT['description'] | null>;
+}>;
+
 type ResumeFormGroupT = FormGroup<{
   contact: ContactFormGroupT;
+  profile: ProfileFormGroupT;
 }>;
 
 @Component({
@@ -43,10 +48,18 @@ export class ResumeFormComponent {
   protected contactNameLabel: string = 'Name';
   protected contactTitleLabel: string = 'Title';
 
+  /* ••[3]••••• Profile •••••••••• */
+
+  protected profileLabel: string = 'Profile';
+  protected profileDescriptionLabel: string = 'Description';
+
   protected resumeForm: ResumeFormGroupT = new FormGroup({
     contact: new FormGroup({
       name: new FormControl(''),
       title: new FormControl(''),
+    }),
+    profile: new FormGroup({
+      description: new FormControl(''),
     }),
   });
 

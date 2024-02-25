@@ -48,6 +48,37 @@
       </mat-form-field>
     </fieldset>
 
+    <!-- Profile -->
+    <fieldset
+      class="border border-slate-500 p-4 rounded-md mt-4"
+      formGroupName="profile"
+    >
+      <legend class="uppercase font-semibold text-accent px-2 text-base">
+        {{ profileLabel }}
+      </legend>
+      <!-- Name -->
+      <mat-form-field class="w-full" color="primary">
+        <mat-label>{{ profileDescriptionLabel }}</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="description"
+          #profileDescriptionRef
+        />
+        @if (profileDescriptionRef.value) {
+        <button
+          matSuffix
+          mat-icon-button
+          matTooltip="{{ clearLabel }}"
+          matTooltipPosition="above"
+          (click)="profileDescriptionRef.value = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+    </fieldset>
+
     <!-- Form actions -->
     <div class="mt-4 flex justify-end">
       <button mat-raised-button color="accent" type="submit">
