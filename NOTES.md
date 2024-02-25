@@ -119,3 +119,7 @@ https://material.angular.io/components/slide-toggle/overview
 ## Create a proper strong typing mechanism
 
 - Create some helper type that we can reuse ResumeFormComponent
+
+## Improve strong typing mechanism
+
+- We should reuse and consider our main source of truth when we define types, so lets update our internal ResumeFormComponent typing definition

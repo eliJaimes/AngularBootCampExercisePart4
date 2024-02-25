@@ -2,10 +2,11 @@
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
+import { ContactT } from '../../entities/resumeForm.type';
 
 type ContactFormGroupT = FormGroup<{
-  name: FormControl<string | null>;
-  title: FormControl<string | null>;
+  name: FormControl<ContactT['name'] | null>;
+  title: FormControl<ContactT['title'] | null>;
 }>;
 
 type ResumeFormGroupT = FormGroup<{
