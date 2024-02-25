@@ -109,3 +109,9 @@ https://material.angular.io/components/slide-toggle/overview
 
 - Note: it might be a good practice to use the components selector name as a a class wrapper for the components
 - Use Tailwind's utility classes to style App and ResumeForm components
+
+## Create the resume form and handle contact piece
+
+- Get rid of the lorem ipsum text
+- Import ReactiveFormsModule on ResumeFormComponent, using the imports array
+- Define a resumeForm property and use FormGroup and FormControl classes to define the structure of the ResumeForm contact piece
