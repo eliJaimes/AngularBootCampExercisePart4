@@ -1,10 +1,5 @@
 <!-- ••[1]••••••••••••••••••••••••• resume-form.component.html •••••••••••••••••••••••••••••• -->
 
-<pre>
-  resumeForm.valid: {{ resumeForm.valid }}
-  resumeForm.invalid: {{ resumeForm.invalid }}
-</pre>
-
 <div class="app-resume-form">
   <form
     class="m-10 border-2 border-primary rounded-md p-6 shadow-lg shadow-primary"
@@ -49,6 +44,23 @@
         <mat-icon>close</mat-icon>
       </button>
       }
+      <mat-error>
+        @if (resumeForm.controls.contact.controls.name.hasError('required')) {
+        {{ requiredErrorFieldLabel }}
+        } @else if
+        (resumeForm.controls.contact.controls.name.hasError('minlength')) {
+
+        {{
+          minLengthErrorFieldLabel(
+            resumeForm.controls.contact.controls.name.errors
+          )
+        }}
+
+        } @else if
+        (resumeForm.controls.contact.controls.name.hasError('pattern')) {
+        {{ patternErrorFieldLabel }}
+        }
+      </mat-error>
     </mat-form-field>
     <!-- Title -->
     <mat-form-field class="w-full" color="primary">
@@ -65,6 +77,23 @@
         <mat-icon>close</mat-icon>
       </button>
       }
+      <mat-error>
+        @if (resumeForm.controls.contact.controls.title.hasError('required')) {
+        {{ requiredErrorFieldLabel }}
+        } @else if
+        (resumeForm.controls.contact.controls.title.hasError('minlength')) {
+
+        {{
+          minLengthErrorFieldLabel(
+            resumeForm.controls.contact.controls.title.errors
+          )
+        }}
+
+        } @else if
+        (resumeForm.controls.contact.controls.title.hasError('pattern')) {
+        {{ patternErrorFieldLabel }}
+        }
+      </mat-error>
     </mat-form-field>
   </fieldset>
 </ng-template>
@@ -95,6 +124,26 @@
         <mat-icon>close</mat-icon>
       </button>
       }
+      <mat-error>
+        @if
+        (resumeForm.controls.profile.controls.description.hasError('required'))
+        {
+        {{ requiredErrorFieldLabel }}
+        } @else if
+        (resumeForm.controls.profile.controls.description.hasError('minlength'))
+        {
+
+        {{
+          minLengthErrorFieldLabel(
+            resumeForm.controls.profile.controls.description.errors
+          )
+        }}
+
+        } @else if
+        (resumeForm.controls.profile.controls.description.hasError('pattern')) {
+        {{ patternErrorFieldLabel }}
+        }
+      </mat-error>
     </mat-form-field>
   </fieldset>
 </ng-template>

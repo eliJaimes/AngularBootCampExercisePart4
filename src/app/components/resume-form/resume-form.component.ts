@@ -49,6 +49,18 @@ export class ResumeFormComponent {
   protected clearLabel: string = 'Clear';
   protected submitLabel: string = 'Submit';
 
+  protected requiredErrorFieldLabel: string = 'This field is required';
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected minLengthErrorFieldLabel: (error: any) => string = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error: any
+  ): string => {
+    return `This field should be ${error.minlength.requiredLength} characters long`;
+  };
+
+  protected patternErrorFieldLabel: string = 'Invalid character on this field';
+
   /* ••[3]••••• Contact •••••••••• */
 
   protected contactLabel: string = 'Contact';

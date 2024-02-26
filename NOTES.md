@@ -169,3 +169,8 @@ https://tailwindcss.com/docs/adding-custom-styles#writing-plugins
 - Add built in validators to current field
 - Fix and issue on Contact Title field, replace formControlTitle to formControlName, this was a replace title, sorry ☺
 - Disabled form submission if the form is no valid
+
+## Show error messages on form controls
+
+- Add some label properties to display on the template
+- Include elements to render errors base on validator rules
