@@ -133,7 +133,7 @@
     <div class="flex justify-end">
       <button
         mat-mini-fab
-        color="primary"
+        color="accent"
         matTooltip="{{ addCapabilityLabel }}"
         matTooltipPosition="above"
         type="button"
@@ -153,71 +153,89 @@
       <legend class="font-normal capitalize px-2 text-slate-500">
         {{ capabilityLabel }} ◦ {{ $index + 1 }}
       </legend>
-      <!-- Title -->
-      <mat-form-field class="w-full" color="primary">
-        <mat-label>{{ capabilityTitleLabel }}</mat-label>
-        <input
-          matInput
-          type="text"
-          formControlName="title"
-          #capabilityTitleRef
-        />
-        @if (capabilityTitleRef.value) {
-        <button
-          matSuffix
-          mat-icon-button
-          matTooltip="{{ clearLabel }}"
-          matTooltipPosition="above"
-          (click)="capabilityTitleRef.value = ''"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
+      <div class="flex">
+        <div class="flex-1">
+          <!-- Title -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ capabilityTitleLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="title"
+              #capabilityTitleRef
+            />
+            @if (capabilityTitleRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="capabilityTitleRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.capabilities.at($index).controls.title
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Description -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ capabilityDescriptionLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="description"
+              #capabilityDescriptionRef
+            />
+            @if (capabilityDescriptionRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="capabilityDescriptionRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.capabilities.at($index).controls
+                        .description
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        @if (!$first) {
+        <div class="ml-4">
+          <button
+            mat-mini-fab
+            color="primary"
+            matTooltip="{{ removeCapabilityLabel }}"
+            matTooltipPosition="above"
+            type="button"
+            (click)="removeCapability($index)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
         }
-        <mat-error>
-          <ng-container
-            *ngTemplateOutlet="
-              formErrorsRef;
-              context: {
-                $implicit:
-                  resumeForm.controls.capabilities.at($index).controls.title
-              }
-            "
-          ></ng-container>
-        </mat-error>
-      </mat-form-field>
-      <!-- Description -->
-      <mat-form-field class="w-full" color="primary">
-        <mat-label>{{ capabilityDescriptionLabel }}</mat-label>
-        <input
-          matInput
-          type="text"
-          formControlName="description"
-          #capabilityDescriptionRef
-        />
-        @if (capabilityDescriptionRef.value) {
-        <button
-          matSuffix
-          mat-icon-button
-          matTooltip="{{ clearLabel }}"
-          matTooltipPosition="above"
-          (click)="capabilityDescriptionRef.value = ''"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-        }
-        <mat-error>
-          <ng-container
-            *ngTemplateOutlet="
-              formErrorsRef;
-              context: {
-                $implicit:
-                  resumeForm.controls.capabilities.at($index).controls
-                    .description
-              }
-            "
-          ></ng-container>
-        </mat-error>
-      </mat-form-field>
+      </div>
     </fieldset>
     }
   </fieldset>

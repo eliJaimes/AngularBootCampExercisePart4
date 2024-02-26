@@ -199,3 +199,7 @@ https://angular.io/api/common/NgTemplateOutlet
 ## Create logic to add capabilities
 
 - Add logic and UI to add capabilities on user demand
+
+## Create logic to remove capabilities
+
+- Add logic and UI to remove capabilities on user demand

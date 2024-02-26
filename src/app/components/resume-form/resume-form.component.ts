@@ -87,6 +87,7 @@ export class ResumeFormComponent {
   /* ••[3]••••• Capabilities •••••••••• */
 
   protected addCapabilityLabel: string = 'Add capability';
+  protected removeCapabilityLabel: string = 'Remove capability';
   protected capabilitiesLabel: string = 'Capabilities';
   protected capabilityLabel: string = 'Capability';
   protected capabilityDescriptionLabel: string = 'Description';
@@ -127,6 +128,10 @@ export class ResumeFormComponent {
     });
 
     this.resumeForm.controls.capabilities.push(newCapability);
+  }
+
+  protected removeCapability(capabilityIndex: number): void {
+    this.resumeForm.controls.capabilities.removeAt(capabilityIndex);
   }
 
   protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {
