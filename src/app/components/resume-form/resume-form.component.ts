@@ -22,17 +22,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgTemplateOutlet } from '@angular/common';
 
 type ContactFormGroupT = FormGroup<{
-  name: FormControl<ContactT['name'] | null>;
-  title: FormControl<ContactT['title'] | null>;
+  name: FormControl<ContactT['name']>;
+  title: FormControl<ContactT['title']>;
 }>;
 
 type ProfileFormGroupT = FormGroup<{
-  description: FormControl<ProfileT['description'] | null>;
+  description: FormControl<ProfileT['description']>;
 }>;
 
 type CapabilityFormGroupT = FormGroup<{
-  description: FormControl<CapabilityT['description'] | null>;
-  title: FormControl<CapabilityT['title'] | null>;
+  description: FormControl<CapabilityT['description']>;
+  title: FormControl<CapabilityT['title']>;
 }>;
 
 type ResumeFormGroupT = FormGroup<{
@@ -43,12 +43,12 @@ type ResumeFormGroupT = FormGroup<{
 
 @Component({
   imports: [
-    NgTemplateOutlet,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatTooltipModule,
+    NgTemplateOutlet,
     ReactiveFormsModule,
   ],
   selector: 'app-resume-form',
@@ -106,25 +106,49 @@ export class ResumeFormComponent {
   ];
 
   protected resumeForm: ResumeFormGroupT = new FormGroup({
-    capabilities: new FormArray([
-      new FormGroup({
-        description: new FormControl('', this.extendedSentenceValidators),
-        title: new FormControl('', this.sentenceValidators),
-      }),
-    ]),
+    capabilities: new FormArray(
+      [
+        new FormGroup({
+          description: new FormControl('', {
+            nonNullable: true,
+            validators: this.extendedSentenceValidators,
+          }),
+          title: new FormControl('', {
+            nonNullable: true,
+            validators: this.sentenceValidators,
+          }),
+        }),
+      ],
+      Validators.minLength(1)
+    ),
     contact: new FormGroup({
-      name: new FormControl('', this.sentenceValidators),
-      title: new FormControl('', this.sentenceValidators),
+      name: new FormControl('', {
+        nonNullable: true,
+        validators: this.sentenceValidators,
+      }),
+      title: new FormControl('', {
+        nonNullable: true,
+        validators: this.sentenceValidators,
+      }),
     }),
     profile: new FormGroup({
-      description: new FormControl('', this.extendedSentenceValidators),
+      description: new FormControl('', {
+        nonNullable: true,
+        validators: this.extendedSentenceValidators,
+      }),
     }),
   });
 
   protected addCapability(): void {
     const newCapability: CapabilityFormGroupT = new FormGroup({
-      description: new FormControl('', this.extendedSentenceValidators),
-      title: new FormControl('', this.sentenceValidators),
+      description: new FormControl('', {
+        nonNullable: true,
+        validators: this.extendedSentenceValidators,
+      }),
+      title: new FormControl('', {
+        nonNullable: true,
+        validators: this.sentenceValidators,
+      }),
     });
 
     this.resumeForm.controls.capabilities.push(newCapability);

@@ -203,3 +203,8 @@ https://angular.io/api/common/NgTemplateOutlet
 ## Create logic to remove capabilities
 
 - Add logic and UI to remove capabilities on user demand
+
+## Fix visual issue when deleting a capability
+
+- Update the track predicate to capabilityControl on the @for template block
+- Note: we can also make the formControl nonNullable ones, so our typings match our validators

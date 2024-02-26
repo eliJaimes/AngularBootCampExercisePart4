@@ -144,7 +144,7 @@
     </div>
 
     @for (capabilityControl of resumeForm.controls.capabilities.controls; track
-    $index) {
+    capabilityControl) {
 
     <fieldset
       class="capability fieldset border-slate-700 mt-4"
@@ -221,7 +221,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        @if (!$first) {
+        @if ($count > 1) {
         <div class="ml-4">
           <button
             mat-mini-fab
