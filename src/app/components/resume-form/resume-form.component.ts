@@ -1,7 +1,12 @@
 /* ••[1]••••••••••••••••••••••••• resume-form.component.ts •••••••••••••••••••••••••••••• */
 
 import { ContactT, ProfileT } from '../../entities/resumeForm.type';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -57,11 +62,23 @@ export class ResumeFormComponent {
 
   protected resumeForm: ResumeFormGroupT = new FormGroup({
     contact: new FormGroup({
-      name: new FormControl(''),
-      title: new FormControl(''),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^[a-zA-Z0-9]+$/),
+      ]),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^[\w]+$/),
+      ]),
     }),
     profile: new FormGroup({
-      description: new FormControl(''),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern(/^[\w,.]+$/),
+      ]),
     }),
   });
 

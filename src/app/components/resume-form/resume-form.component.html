@@ -1,5 +1,10 @@
 <!-- ••[1]••••••••••••••••••••••••• resume-form.component.html •••••••••••••••••••••••••••••• -->
 
+<pre>
+  resumeForm.valid: {{ resumeForm.valid }}
+  resumeForm.invalid: {{ resumeForm.invalid }}
+</pre>
+
 <div class="app-resume-form">
   <form
     class="m-10 border-2 border-primary rounded-md p-6 shadow-lg shadow-primary"
@@ -48,7 +53,7 @@
     <!-- Title -->
     <mat-form-field class="w-full" color="primary">
       <mat-label>{{ contactTitleLabel }}</mat-label>
-      <input matInput type="text" formControlTitle="title" #contactTitleRef />
+      <input matInput type="text" formControlName="title" #contactTitleRef />
       @if (contactTitleRef.value) {
       <button
         matSuffix
@@ -97,7 +102,12 @@
 <!-- ••[3]••••• Form actions •••••••••• -->
 <ng-template #formActionsRef>
   <div class="mt-4 flex justify-end">
-    <button mat-raised-button color="accent" type="submit">
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="resumeForm.invalid"
+    >
       {{ submitLabel }}
     </button>
   </div>

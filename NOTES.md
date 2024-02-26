@@ -163,3 +163,9 @@ https://tailwindcss.com/docs/adding-custom-styles#writing-plugins
 
 - Use an ng-container directive with a ngTemplateOutlet directive to insert an embedded view from a prepared TemplateRef
 - We will use this pattern so we have a clean an easier to handle structure
+
+## Include some basic built in validators on the form fields
+
+- Add built in validators to current field
+- Fix and issue on Contact Title field, replace formControlTitle to formControlName, this was a replace title, sorry ☺
+- Disabled form submission if the form is no valid
