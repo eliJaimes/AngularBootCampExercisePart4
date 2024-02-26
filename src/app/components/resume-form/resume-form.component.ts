@@ -84,6 +84,12 @@ export class ResumeFormComponent {
   protected profileLabel: string = 'Profile';
   protected profileDescriptionLabel: string = 'Description';
 
+  /* ••[3]••••• Capabilities •••••••••• */
+
+  protected capabilitiesLabel: string = 'Capabilities';
+  protected capabilitiesDescriptionLabel: string = 'Description';
+  protected capabilitiesTitleLabel: string = 'Title';
+
   private sentenceValidators: Array<ValidatorFn> = [
     Validators.required,
     Validators.minLength(3),

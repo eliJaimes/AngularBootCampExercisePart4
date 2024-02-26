@@ -186,3 +186,8 @@ https://angular.io/api/common/NgTemplateOutlet
 
 - Use FormGroup and FormControl classes to define the structure of the ResumeForm capability piece
 - Use FormArray class to define the capabilities property on the resumeForm property
+
+## Reflect the ResumeForm capabilities piece on the UI
+
+- Create basic layout to render capabilities on the UI
+- Use the formArrayName directive to wire the capabilities resumeForm property

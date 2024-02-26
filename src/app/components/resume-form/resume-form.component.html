@@ -12,6 +12,9 @@
     <!-- Profile -->
     <ng-container [ngTemplateOutlet]="profileFieldsetRef"></ng-container>
 
+    <!-- Capabilities -->
+    <ng-container [ngTemplateOutlet]="capabilitiesFieldsetRef"></ng-container>
+
     <!-- Form actions -->
     <ng-container [ngTemplateOutlet]="formActionsRef"></ng-container>
   </form>
@@ -117,6 +120,15 @@
         ></ng-container>
       </mat-error>
     </mat-form-field>
+  </fieldset>
+</ng-template>
+
+<!-- ••[3]••••• Capabilities •••••••••• -->
+<ng-template #capabilitiesFieldsetRef [formGroup]="resumeForm">
+  <fieldset class="fieldset mt-4" formArrayName="capabilities">
+    <legend class="legend">
+      {{ capabilitiesLabel }}
+    </legend>
   </fieldset>
 </ng-template>
 
