@@ -21,6 +21,9 @@
     <!-- Educations -->
     <ng-container [ngTemplateOutlet]="educationsFieldsetRef"></ng-container>
 
+    <!-- Certifications -->
+    <ng-container [ngTemplateOutlet]="certificationsFieldsetRef"></ng-container>
+
     <!-- Form actions -->
     <ng-container [ngTemplateOutlet]="formActionsRef"></ng-container>
   </form>
@@ -426,6 +429,145 @@
             matTooltipPosition="above"
             type="button"
             (click)="removeEducation($index)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+    </fieldset>
+    }
+  </fieldset>
+</ng-template>
+
+<!-- ••[3]••••• Certifications •••••••••• -->
+<ng-template #certificationsFieldsetRef [formGroup]="resumeForm">
+  <fieldset class="fieldset mt-4" formArrayName="certifications">
+    <legend class="legend">
+      {{ certificationsLabel }}
+    </legend>
+
+    <div class="flex justify-end">
+      <button
+        mat-mini-fab
+        color="accent"
+        matTooltip="{{ addCertificationLabel }}"
+        matTooltipPosition="above"
+        type="button"
+        (click)="addCertification()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    @for (CertificationControl of resumeForm.controls.certifications.controls;
+    track CertificationControl) {
+
+    <fieldset
+      class="Certification fieldset border-slate-700 mt-4"
+      [formGroupName]="$index"
+    >
+      <legend class="font-normal capitalize px-2 text-slate-500">
+        {{ certificationLabel }} ◦ {{ $index + 1 }}
+      </legend>
+      <div class="flex">
+        <div class="flex-1">
+          <!-- Institution -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ certificationInstitutionLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="institution"
+              #CertificationInstitutionRef
+            />
+            @if (CertificationInstitutionRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="CertificationInstitutionRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.certifications.at($index).controls
+                        .institution
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Title -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ certificationTitleLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="title"
+              #CertificationTitleRef
+            />
+            @if (CertificationTitleRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="CertificationTitleRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.certifications.at($index).controls
+                        .title
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Date -->
+          <mat-form-field class="w-full">
+            <mat-label>{{ certificationDateLabel }}</mat-label>
+            <input
+              matInput
+              [max]="maxDate"
+              [matDatepicker]="matDatepickerRef"
+              disabled
+            />
+            <mat-hint>{{ certificationDateHintLabel }}</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="matDatepickerRef"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #matDatepickerRef
+              startView="multi-year"
+              disabled="false"
+            ></mat-datepicker>
+          </mat-form-field>
+        </div>
+        @if ($count > 1) {
+        <div class="ml-4">
+          <button
+            mat-mini-fab
+            color="primary"
+            matTooltip="{{ removeCertificationLabel }}"
+            matTooltipPosition="above"
+            type="button"
+            (click)="removeCertification($index)"
           >
             <mat-icon>delete</mat-icon>
           </button>

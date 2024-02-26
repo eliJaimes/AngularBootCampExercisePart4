@@ -2,6 +2,7 @@
 
 import {
   CapabilityT,
+  CertificationT,
   ContactT,
   EducationT,
   ProfileT,
@@ -17,6 +18,7 @@ import {
 } from '@angular/forms';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -44,17 +46,25 @@ type EducationFormGroupT = FormGroup<{
   title: FormControl<EducationT['title']>;
 }>;
 
+type CertificationFormGroupT = FormGroup<{
+  date: FormControl<CertificationT['date']>;
+  institution: FormControl<CertificationT['institution']>;
+  title: FormControl<CertificationT['title']>;
+}>;
+
 type ResumeFormGroupT = FormGroup<{
   contact: ContactFormGroupT;
   profile: ProfileFormGroupT;
   capabilities: FormArray<CapabilityFormGroupT>;
   skills: FormArray<SkillFormControlT>;
   educations: FormArray<EducationFormGroupT>;
+  certifications: FormArray<CertificationFormGroupT>;
 }>;
 
 @Component({
   imports: [
     MatButtonModule,
+    MatDatepickerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -120,6 +130,17 @@ export class ResumeFormComponent {
   protected educationInstitutionLabel: string = 'Institution';
   protected educationTitleLabel: string = 'Title';
 
+  /* ••[3]••••• Certifications •••••••••• */
+
+  protected addCertificationLabel: string = 'Add certification';
+  protected removeCertificationLabel: string = 'Remove certification';
+  protected certificationsLabel: string = 'Certifications';
+  protected certificationLabel: string = 'Certification';
+  protected certificationDateLabel: string = 'Date of completion';
+  protected certificationDateHintLabel: string = 'MM/DD/YYYY';
+  protected certificationInstitutionLabel: string = 'Institution';
+  protected certificationTitleLabel: string = 'Title';
+
   private sentenceValidators: Array<ValidatorFn> = [
     Validators.required,
     Validators.minLength(3),
@@ -132,11 +153,32 @@ export class ResumeFormComponent {
     Validators.pattern(/^[\w,.]+$/),
   ];
 
+  protected maxDate: Date = new Date();
+
   protected resumeForm: ResumeFormGroupT = new FormGroup({
     capabilities: new FormArray(
       [
         new FormGroup({
           description: new FormControl('', {
+            nonNullable: true,
+            validators: this.extendedSentenceValidators,
+          }),
+          title: new FormControl('', {
+            nonNullable: true,
+            validators: this.sentenceValidators,
+          }),
+        }),
+      ],
+      Validators.minLength(1)
+    ),
+    certifications: new FormArray(
+      [
+        new FormGroup({
+          date: new FormControl<Date>(new Date(), {
+            nonNullable: true,
+            validators: Validators.required,
+          }),
+          institution: new FormControl('', {
             nonNullable: true,
             validators: this.extendedSentenceValidators,
           }),
@@ -250,6 +292,33 @@ export class ResumeFormComponent {
   protected removeEducation(educationIndex: number): void {
     if (this.resumeForm.controls.educations.controls.length > 1) {
       this.resumeForm.controls.educations.removeAt(educationIndex);
+    }
+  }
+
+  /* ••[2]•••••••••• Certifications ••••••••••••••• */
+
+  protected addCertification(): void {
+    const newCertification: CertificationFormGroupT = new FormGroup({
+      date: new FormControl<Date>(new Date(), {
+        nonNullable: true,
+        validators: Validators.required,
+      }),
+      institution: new FormControl('', {
+        nonNullable: true,
+        validators: this.extendedSentenceValidators,
+      }),
+      title: new FormControl('', {
+        nonNullable: true,
+        validators: this.sentenceValidators,
+      }),
+    });
+
+    this.resumeForm.controls.certifications.push(newCertification);
+  }
+
+  protected removeCertification(CertificationIndex: number): void {
+    if (this.resumeForm.controls.certifications.controls.length > 1) {
+      this.resumeForm.controls.certifications.removeAt(CertificationIndex);
     }
   }
 
