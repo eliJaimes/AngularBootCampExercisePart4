@@ -1,10 +1,16 @@
 /* ••[1]••••••••••••••••••••••••• resume-form.component.ts •••••••••••••••••••••••••••••• */
 
-import { ContactT, ProfileT } from '../../entities/resumeForm.type';
 import {
+  CapabilityT,
+  ContactT,
+  ProfileT,
+} from '../../entities/resumeForm.type';
+import {
+  FormArray,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Component } from '@angular/core';
@@ -24,9 +30,15 @@ type ProfileFormGroupT = FormGroup<{
   description: FormControl<ProfileT['description'] | null>;
 }>;
 
+type CapabilityFormGroupT = FormGroup<{
+  description: FormControl<CapabilityT['description'] | null>;
+  title: FormControl<CapabilityT['title'] | null>;
+}>;
+
 type ResumeFormGroupT = FormGroup<{
   contact: ContactFormGroupT;
   profile: ProfileFormGroupT;
+  capabilities: FormArray<CapabilityFormGroupT>;
 }>;
 
 @Component({
@@ -72,32 +84,36 @@ export class ResumeFormComponent {
   protected profileLabel: string = 'Profile';
   protected profileDescriptionLabel: string = 'Description';
 
+  private sentenceValidators: Array<ValidatorFn> = [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.pattern(/^[\w]+$/),
+  ];
+
+  private extendedSentenceValidators: Array<ValidatorFn> = [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.pattern(/^[\w,.]+$/),
+  ];
+
   protected resumeForm: ResumeFormGroupT = new FormGroup({
+    capabilities: new FormArray([
+      new FormGroup({
+        description: new FormControl('', this.extendedSentenceValidators),
+        title: new FormControl('', this.sentenceValidators),
+      }),
+    ]),
     contact: new FormGroup({
-      name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern(/^[a-zA-Z0-9]+$/),
-      ]),
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern(/^[\w]+$/),
-      ]),
+      name: new FormControl('', this.sentenceValidators),
+      title: new FormControl('', this.sentenceValidators),
     }),
     profile: new FormGroup({
-      description: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern(/^[\w,.]+$/),
-      ]),
+      description: new FormControl('', this.extendedSentenceValidators),
     }),
   });
 
-  protected onSubmit(event: SubmitEvent, form: ResumeFormGroupT): void {
+  protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {
     console.log('%c\nonSubmit', 'color: SpringGreen');
-    console.log('event: %O', event);
-    console.log('form: %O', form);
-    console.log('this.resumeForm: %O', this.resumeForm);
+    console.log('this.resumeForm.value: %O', this.resumeForm.value);
   }
 }

@@ -181,3 +181,8 @@ https://angular.io/api/common/NgTemplateOutlet
 
 - Use an ng-container directive with a ngTemplateOutlet directive to insert an embedded view from a prepared TemplateRef
 - The TemplateRef should receive a context object so it can apply logic depending on the corresponding form control
+
+## On form handle capabilities piece
+
+- Use FormGroup and FormControl classes to define the structure of the ResumeForm capability piece
+- Use FormArray class to define the capabilities property on the resumeForm property
