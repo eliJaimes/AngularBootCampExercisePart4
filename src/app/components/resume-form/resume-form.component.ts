@@ -4,6 +4,7 @@ import {
   CapabilityT,
   ContactT,
   ProfileT,
+  SkillT,
 } from '../../entities/resumeForm.type';
 import {
   FormArray,
@@ -35,10 +36,13 @@ type CapabilityFormGroupT = FormGroup<{
   title: FormControl<CapabilityT['title']>;
 }>;
 
+type SkillFormControlT = FormControl<SkillT>;
+
 type ResumeFormGroupT = FormGroup<{
   contact: ContactFormGroupT;
   profile: ProfileFormGroupT;
   capabilities: FormArray<CapabilityFormGroupT>;
+  skills: FormArray<SkillFormControlT>;
 }>;
 
 @Component({
@@ -93,6 +97,13 @@ export class ResumeFormComponent {
   protected capabilityDescriptionLabel: string = 'Description';
   protected capabilityTitleLabel: string = 'Title';
 
+  /* ••[3]••••• Skills •••••••••• */
+
+  protected addSkillLabel: string = 'Add skill';
+  protected removeSkillLabel: string = 'Remove skill';
+  protected skillsLabel: string = 'Skills';
+  protected skillLabel: string = 'Skill';
+
   private sentenceValidators: Array<ValidatorFn> = [
     Validators.required,
     Validators.minLength(3),
@@ -137,7 +148,15 @@ export class ResumeFormComponent {
         validators: this.extendedSentenceValidators,
       }),
     }),
+    skills: new FormArray([
+      new FormControl('', {
+        nonNullable: true,
+        validators: this.sentenceValidators,
+      }),
+    ]),
   });
+
+  /* ••[2]•••••••••• Capabilities ••••••••••••••• */
 
   protected addCapability(): void {
     const newCapability: CapabilityFormGroupT = new FormGroup({
@@ -155,7 +174,26 @@ export class ResumeFormComponent {
   }
 
   protected removeCapability(capabilityIndex: number): void {
-    this.resumeForm.controls.capabilities.removeAt(capabilityIndex);
+    if (this.resumeForm.controls.capabilities.controls.length > 1) {
+      this.resumeForm.controls.capabilities.removeAt(capabilityIndex);
+    }
+  }
+
+  /* ••[2]•••••••••• Skills ••••••••••••••• */
+
+  protected addSkill(): void {
+    const newSkill: SkillFormControlT = new FormControl('', {
+      nonNullable: true,
+      validators: this.sentenceValidators,
+    });
+
+    this.resumeForm.controls.skills.push(newSkill);
+  }
+
+  protected removeSkill(skillIndex: number): void {
+    if (this.resumeForm.controls.skills.length > 1) {
+      this.resumeForm.controls.skills.removeAt(skillIndex);
+    }
   }
 
   protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {

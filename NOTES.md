@@ -208,3 +208,10 @@ https://angular.io/api/common/NgTemplateOutlet
 
 - Update the track predicate to capabilityControl on the @for template block
 - Note: we can also make the formControl nonNullable ones, so our typings match our validators
+
+## Reflect the ResumeForm capabilities piece on the UI
+
+- Create necessary structures to wire the input according to the skills field length
+- Add logic and UI to add skills on user demand
+- Add logic and UI to remove skills on user demand
+- Improve removeCapability and removeSkill logic

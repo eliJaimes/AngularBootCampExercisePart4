@@ -15,6 +15,9 @@
     <!-- Capabilities -->
     <ng-container [ngTemplateOutlet]="capabilitiesFieldsetRef"></ng-container>
 
+    <!-- Skills -->
+    <ng-container [ngTemplateOutlet]="skillsFieldsetRef"></ng-container>
+
     <!-- Form actions -->
     <ng-container [ngTemplateOutlet]="formActionsRef"></ng-container>
   </form>
@@ -237,6 +240,78 @@
         }
       </div>
     </fieldset>
+    }
+  </fieldset>
+</ng-template>
+
+<!-- ••[3]••••• Skills •••••••••• -->
+<ng-template #skillsFieldsetRef [formGroup]="resumeForm">
+  <fieldset class="fieldset mt-4" formArrayName="skills">
+    <legend class="legend">
+      {{ skillsLabel }}
+    </legend>
+
+    <div class="flex justify-end">
+      <button
+        mat-mini-fab
+        color="accent"
+        matTooltip="{{ addSkillLabel }}"
+        matTooltipPosition="above"
+        type="button"
+        (click)="addSkill()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    @for (skillControl of resumeForm.controls.skills.controls; track
+    skillControl) {
+
+    <div class="flex mt-4" [class.mt-6]="$first">
+      <div class="flex-1">
+        <!-- Skill -->
+        <mat-form-field class="w-full" color="primary">
+          <mat-label>{{ skillLabel }}</mat-label>
+          <input matInput type="text" [formControlName]="$index" #skillRef />
+          @if (skillRef.value) {
+          <button
+            matSuffix
+            mat-icon-button
+            matTooltip="{{ clearLabel }}"
+            matTooltipPosition="above"
+            (click)="skillRef.value = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          }
+          <mat-error>
+            <ng-container
+              *ngTemplateOutlet="
+                formErrorsRef;
+                context: {
+                  $implicit: resumeForm.controls.skills.at($index)
+                }
+              "
+            ></ng-container>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      @if ($count > 1) {
+      <div class="ml-4">
+        <button
+          mat-mini-fab
+          color="primary"
+          matTooltip="{{ removeSkillLabel }}"
+          matTooltipPosition="above"
+          type="button"
+          (click)="removeSkill($index)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      }
+    </div>
+
     }
   </fieldset>
 </ng-template>
