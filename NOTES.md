@@ -191,3 +191,7 @@ https://angular.io/api/common/NgTemplateOutlet
 
 - Create basic layout to render capabilities on the UI
 - Use the formArrayName directive to wire the capabilities resumeForm property
+
+## Create dynamic capabilities piece on the UI
+
+- Create necessary structures to wire the description and title properties according to the capabilities field length
