@@ -3,6 +3,7 @@
 import {
   CapabilityT,
   ContactT,
+  EducationT,
   ProfileT,
   SkillT,
 } from '../../entities/resumeForm.type';
@@ -38,11 +39,17 @@ type CapabilityFormGroupT = FormGroup<{
 
 type SkillFormControlT = FormControl<SkillT>;
 
+type EducationFormGroupT = FormGroup<{
+  institution: FormControl<EducationT['institution']>;
+  title: FormControl<EducationT['title']>;
+}>;
+
 type ResumeFormGroupT = FormGroup<{
   contact: ContactFormGroupT;
   profile: ProfileFormGroupT;
   capabilities: FormArray<CapabilityFormGroupT>;
   skills: FormArray<SkillFormControlT>;
+  educations: FormArray<EducationFormGroupT>;
 }>;
 
 @Component({
@@ -104,6 +111,15 @@ export class ResumeFormComponent {
   protected skillsLabel: string = 'Skills';
   protected skillLabel: string = 'Skill';
 
+  /* ••[3]••••• Educations •••••••••• */
+
+  protected addEducationLabel: string = 'Add education';
+  protected removeEducationLabel: string = 'Remove education';
+  protected educationsLabel: string = 'Educations';
+  protected educationLabel: string = 'Education';
+  protected educationInstitutionLabel: string = 'Institution';
+  protected educationTitleLabel: string = 'Title';
+
   private sentenceValidators: Array<ValidatorFn> = [
     Validators.required,
     Validators.minLength(3),
@@ -142,18 +158,36 @@ export class ResumeFormComponent {
         validators: this.sentenceValidators,
       }),
     }),
+    educations: new FormArray(
+      [
+        new FormGroup({
+          institution: new FormControl('', {
+            nonNullable: true,
+            validators: this.extendedSentenceValidators,
+          }),
+          title: new FormControl('', {
+            nonNullable: true,
+            validators: this.sentenceValidators,
+          }),
+        }),
+      ],
+      Validators.minLength(1)
+    ),
     profile: new FormGroup({
       description: new FormControl('', {
         nonNullable: true,
         validators: this.extendedSentenceValidators,
       }),
     }),
-    skills: new FormArray([
-      new FormControl('', {
-        nonNullable: true,
-        validators: this.sentenceValidators,
-      }),
-    ]),
+    skills: new FormArray(
+      [
+        new FormControl('', {
+          nonNullable: true,
+          validators: this.sentenceValidators,
+        }),
+      ],
+      Validators.minLength(1)
+    ),
   });
 
   /* ••[2]•••••••••• Capabilities ••••••••••••••• */
@@ -193,6 +227,29 @@ export class ResumeFormComponent {
   protected removeSkill(skillIndex: number): void {
     if (this.resumeForm.controls.skills.length > 1) {
       this.resumeForm.controls.skills.removeAt(skillIndex);
+    }
+  }
+
+  /* ••[2]•••••••••• Educations ••••••••••••••• */
+
+  protected addEducation(): void {
+    const newEducation: EducationFormGroupT = new FormGroup({
+      institution: new FormControl('', {
+        nonNullable: true,
+        validators: this.extendedSentenceValidators,
+      }),
+      title: new FormControl('', {
+        nonNullable: true,
+        validators: this.sentenceValidators,
+      }),
+    });
+
+    this.resumeForm.controls.educations.push(newEducation);
+  }
+
+  protected removeEducation(educationIndex: number): void {
+    if (this.resumeForm.controls.educations.controls.length > 1) {
+      this.resumeForm.controls.educations.removeAt(educationIndex);
     }
   }
 

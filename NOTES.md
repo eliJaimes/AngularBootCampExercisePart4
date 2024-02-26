@@ -215,3 +215,7 @@ https://angular.io/api/common/NgTemplateOutlet
 - Add logic and UI to add skills on user demand
 - Add logic and UI to remove skills on user demand
 - Improve removeCapability and removeSkill logic
+
+## Reflect the ResumeForm for educations pieces on the UI
+
+- Replicate above steps to complete the educations form

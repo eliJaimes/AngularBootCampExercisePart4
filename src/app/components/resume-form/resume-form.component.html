@@ -18,6 +18,9 @@
     <!-- Skills -->
     <ng-container [ngTemplateOutlet]="skillsFieldsetRef"></ng-container>
 
+    <!-- Educations -->
+    <ng-container [ngTemplateOutlet]="educationsFieldsetRef"></ng-container>
+
     <!-- Form actions -->
     <ng-container [ngTemplateOutlet]="formActionsRef"></ng-container>
   </form>
@@ -312,6 +315,124 @@
       }
     </div>
 
+    }
+  </fieldset>
+</ng-template>
+
+<!-- ••[3]••••• Educations •••••••••• -->
+<ng-template #educationsFieldsetRef [formGroup]="resumeForm">
+  <fieldset class="fieldset mt-4" formArrayName="educations">
+    <legend class="legend">
+      {{ educationsLabel }}
+    </legend>
+
+    <div class="flex justify-end">
+      <button
+        mat-mini-fab
+        color="accent"
+        matTooltip="{{ addEducationLabel }}"
+        matTooltipPosition="above"
+        type="button"
+        (click)="addEducation()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    @for (educationControl of resumeForm.controls.educations.controls; track
+    educationControl) {
+
+    <fieldset
+      class="education fieldset border-slate-700 mt-4"
+      [formGroupName]="$index"
+    >
+      <legend class="font-normal capitalize px-2 text-slate-500">
+        {{ educationLabel }} ◦ {{ $index + 1 }}
+      </legend>
+      <div class="flex">
+        <div class="flex-1">
+          <!-- Institution -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ educationInstitutionLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="institution"
+              #educationInstitutionRef
+            />
+            @if (educationInstitutionRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="educationInstitutionRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.educations.at($index).controls
+                        .institution
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Title -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ educationTitleLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="title"
+              #educationTitleRef
+            />
+            @if (educationTitleRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="educationTitleRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.educations.at($index).controls.title
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        @if ($count > 1) {
+        <div class="ml-4">
+          <button
+            mat-mini-fab
+            color="primary"
+            matTooltip="{{ removeEducationLabel }}"
+            matTooltipPosition="above"
+            type="button"
+            (click)="removeEducation($index)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+    </fieldset>
     }
   </fieldset>
 </ng-template>
