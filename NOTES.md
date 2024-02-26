@@ -158,3 +158,8 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 https://tailwindcss.com/docs/adding-custom-styles#writing-plugins
 
 - Let's isolate the utility classes applied to the legend element
+
+## Refactor to improve template organization
+
+- Use an ng-container directive with a ngTemplateOutlet directive to insert an embedded view from a prepared TemplateRef
+- We will use this pattern so we have a clean an easier to handle structure

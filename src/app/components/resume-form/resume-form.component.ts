@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgTemplateOutlet } from '@angular/common';
 
 type ContactFormGroupT = FormGroup<{
   name: FormControl<ContactT['name'] | null>;
@@ -25,6 +26,7 @@ type ResumeFormGroupT = FormGroup<{
 
 @Component({
   imports: [
+    NgTemplateOutlet,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
