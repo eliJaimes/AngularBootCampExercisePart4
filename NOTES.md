@@ -195,3 +195,7 @@ https://angular.io/api/common/NgTemplateOutlet
 ## Create dynamic capabilities piece on the UI
 
 - Create necessary structures to wire the description and title properties according to the capabilities field length
+
+## Create logic to add capabilities
+
+- Add logic and UI to add capabilities on user demand

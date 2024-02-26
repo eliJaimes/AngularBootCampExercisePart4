@@ -86,6 +86,7 @@ export class ResumeFormComponent {
 
   /* ••[3]••••• Capabilities •••••••••• */
 
+  protected addCapabilityLabel: string = 'Add capability';
   protected capabilitiesLabel: string = 'Capabilities';
   protected capabilityLabel: string = 'Capability';
   protected capabilityDescriptionLabel: string = 'Description';
@@ -118,6 +119,15 @@ export class ResumeFormComponent {
       description: new FormControl('', this.extendedSentenceValidators),
     }),
   });
+
+  protected addCapability(): void {
+    const newCapability: CapabilityFormGroupT = new FormGroup({
+      description: new FormControl('', this.extendedSentenceValidators),
+      title: new FormControl('', this.sentenceValidators),
+    });
+
+    this.resumeForm.controls.capabilities.push(newCapability);
+  }
 
   protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {
     console.log('%c\nonSubmit', 'color: SpringGreen');

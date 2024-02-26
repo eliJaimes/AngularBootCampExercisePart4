@@ -130,11 +130,24 @@
       {{ capabilitiesLabel }}
     </legend>
 
+    <div class="flex justify-end">
+      <button
+        mat-mini-fab
+        color="primary"
+        matTooltip="{{ addCapabilityLabel }}"
+        matTooltipPosition="above"
+        type="button"
+        (click)="addCapability()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
     @for (capabilityControl of resumeForm.controls.capabilities.controls; track
     $index) {
 
     <fieldset
-      class="capability fieldset border-slate-700"
+      class="capability fieldset border-slate-700 mt-4"
       [formGroupName]="$index"
     >
       <legend class="font-normal capitalize px-2 text-slate-500">
