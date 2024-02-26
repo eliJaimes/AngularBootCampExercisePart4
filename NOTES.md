@@ -174,3 +174,10 @@ https://tailwindcss.com/docs/adding-custom-styles#writing-plugins
 
 - Add some label properties to display on the template
 - Include elements to render errors base on validator rules
+
+## Improve template organization by isolate field errors
+
+https://angular.io/api/common/NgTemplateOutlet
+
+- Use an ng-container directive with a ngTemplateOutlet directive to insert an embedded view from a prepared TemplateRef
+- The TemplateRef should receive a context object so it can apply logic depending on the corresponding form control
