@@ -243,3 +243,7 @@ https://material.angular.io/components/expansion/overview
 - Let's constraint our form according to the view port
 - Import MatDatepickerModule on ResumeFormComponent
 - Improve UI by allowing user to expand-collapse form sections
+
+## Refactor, isolate labels to a file
+
+- Lets create a file that contains all ResumeFormComponent labels

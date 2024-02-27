@@ -15,7 +15,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon class="mr-4" color="accent">person</mat-icon>
-            {{ contactLabel }}</mat-panel-title
+            {{ label.contact }}</mat-panel-title
           >
         </mat-expansion-panel-header>
         <ng-container [ngTemplateOutlet]="contactFieldsetRef"></ng-container>
@@ -25,7 +25,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon class="mr-4" color="accent">badge</mat-icon
-            >{{ profileLabel }}</mat-panel-title
+            >{{ label.profile }}</mat-panel-title
           >
         </mat-expansion-panel-header>
         <ng-container [ngTemplateOutlet]="profileFieldsetRef"></ng-container>
@@ -35,7 +35,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title
             ><mat-icon class="mr-4" color="accent">construction</mat-icon
-            >{{ capabilitiesLabel }}</mat-panel-title
+            >{{ label.capabilities }}</mat-panel-title
           >
         </mat-expansion-panel-header>
         <ng-container
@@ -47,7 +47,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title
             ><mat-icon class="mr-4" color="accent">workspace_premium</mat-icon
-            >{{ skillsLabel }}</mat-panel-title
+            >{{ label.skills }}</mat-panel-title
           >
         </mat-expansion-panel-header>
         <ng-container [ngTemplateOutlet]="skillsFieldsetRef"></ng-container>
@@ -57,7 +57,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title
             ><mat-icon class="mr-4" color="accent">school</mat-icon
-            >{{ educationsLabel }}</mat-panel-title
+            >{{ label.educations }}</mat-panel-title
           >
         </mat-expansion-panel-header>
         <ng-container [ngTemplateOutlet]="educationsFieldsetRef"></ng-container>
@@ -67,7 +67,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title
             ><mat-icon class="mr-4" color="accent">emoji_events</mat-icon
-            >{{ certificationsLabel }}</mat-panel-title
+            >{{ label.certifications }}</mat-panel-title
           >
         </mat-expansion-panel-header>
         <ng-container
@@ -79,7 +79,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title
             ><mat-icon class="mr-4" color="accent">work</mat-icon
-            >{{ experiencesLabel }}</mat-panel-title
+            >{{ label.experiences }}</mat-panel-title
           >
         </mat-expansion-panel-header>
         <ng-container
@@ -105,17 +105,17 @@
 <ng-template #contactFieldsetRef [formGroup]="resumeForm">
   <fieldset class="fieldset" formGroupName="contact">
     <legend class="legend">
-      {{ contactLabel }}
+      {{ label.contact }}
     </legend>
     <!-- Name -->
     <mat-form-field class="w-full" color="primary">
-      <mat-label>{{ contactNameLabel }}</mat-label>
+      <mat-label>{{ label.contactName }}</mat-label>
       <input matInput type="text" formControlName="name" #contactNameRef />
       @if (contactNameRef.value) {
       <button
         matSuffix
         mat-icon-button
-        matTooltip="{{ clearLabel }}"
+        matTooltip="{{ label.clear }}"
         matTooltipPosition="above"
         (click)="contactNameRef.value = ''"
       >
@@ -133,13 +133,13 @@
     </mat-form-field>
     <!-- Title -->
     <mat-form-field class="w-full" color="primary">
-      <mat-label>{{ contactTitleLabel }}</mat-label>
+      <mat-label>{{ label.contactTitle }}</mat-label>
       <input matInput type="text" formControlName="title" #contactTitleRef />
       @if (contactTitleRef.value) {
       <button
         matSuffix
         mat-icon-button
-        matTooltip="{{ clearLabel }}"
+        matTooltip="{{ label.clear }}"
         matTooltipPosition="above"
         (click)="contactTitleRef.value = ''"
       >
@@ -162,11 +162,11 @@
 <ng-template #profileFieldsetRef [formGroup]="resumeForm">
   <fieldset class="fieldset mt-4" formGroupName="profile">
     <legend class="legend">
-      {{ profileLabel }}
+      {{ label.profile }}
     </legend>
     <!-- Description -->
     <mat-form-field class="w-full" color="primary">
-      <mat-label>{{ profileDescriptionLabel }}</mat-label>
+      <mat-label>{{ label.profileDescription }}</mat-label>
       <input
         matInput
         type="text"
@@ -177,7 +177,7 @@
       <button
         matSuffix
         mat-icon-button
-        matTooltip="{{ clearLabel }}"
+        matTooltip="{{ label.clear }}"
         matTooltipPosition="above"
         (click)="profileDescriptionRef.value = ''"
       >
@@ -202,14 +202,14 @@
 <ng-template #capabilitiesFieldsetRef [formGroup]="resumeForm">
   <fieldset class="fieldset mt-4" formArrayName="capabilities">
     <legend class="legend">
-      {{ capabilitiesLabel }}
+      {{ label.capabilities }}
     </legend>
 
     <div class="flex justify-end">
       <button
         mat-mini-fab
         color="accent"
-        matTooltip="{{ addCapabilityLabel }}"
+        matTooltip="{{ label.addCapability }}"
         matTooltipPosition="above"
         type="button"
         (click)="addCapability()"
@@ -226,13 +226,13 @@
       [formGroupName]="$index"
     >
       <legend class="font-normal capitalize px-2 text-slate-500">
-        {{ capabilityLabel }} ◦ {{ $index + 1 }}
+        {{ label.capability }} ◦ {{ $index + 1 }}
       </legend>
       <div class="flex">
         <div class="flex-1">
           <!-- Title -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ capabilityTitleLabel }}</mat-label>
+            <mat-label>{{ label.capabilityTitle }}</mat-label>
             <input
               matInput
               type="text"
@@ -243,7 +243,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="capabilityTitleRef.value = ''"
             >
@@ -264,7 +264,7 @@
           </mat-form-field>
           <!-- Description -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ capabilityDescriptionLabel }}</mat-label>
+            <mat-label>{{ label.capabilityDescription }}</mat-label>
             <input
               matInput
               type="text"
@@ -275,7 +275,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="capabilityDescriptionRef.value = ''"
             >
@@ -301,7 +301,7 @@
           <button
             mat-mini-fab
             color="primary"
-            matTooltip="{{ removeCapabilityLabel }}"
+            matTooltip="{{ label.removeCapability }}"
             matTooltipPosition="above"
             type="button"
             (click)="removeCapability($index)"
@@ -320,14 +320,14 @@
 <ng-template #skillsFieldsetRef [formGroup]="resumeForm">
   <fieldset class="fieldset mt-4" formArrayName="skills">
     <legend class="legend">
-      {{ skillsLabel }}
+      {{ label.skills }}
     </legend>
 
     <div class="flex justify-end">
       <button
         mat-mini-fab
         color="accent"
-        matTooltip="{{ addSkillLabel }}"
+        matTooltip="{{ label.addSkill }}"
         matTooltipPosition="above"
         type="button"
         (click)="addSkill()"
@@ -343,13 +343,13 @@
       <div class="flex-1">
         <!-- Skill -->
         <mat-form-field class="w-full" color="primary">
-          <mat-label>{{ skillLabel }}</mat-label>
+          <mat-label>{{ label.skill }}</mat-label>
           <input matInput type="text" [formControlName]="$index" #skillRef />
           @if (skillRef.value) {
           <button
             matSuffix
             mat-icon-button
-            matTooltip="{{ clearLabel }}"
+            matTooltip="{{ label.clear }}"
             matTooltipPosition="above"
             (click)="skillRef.value = ''"
           >
@@ -373,7 +373,7 @@
         <button
           mat-mini-fab
           color="primary"
-          matTooltip="{{ removeSkillLabel }}"
+          matTooltip="{{ label.removeSkill }}"
           matTooltipPosition="above"
           type="button"
           (click)="removeSkill($index)"
@@ -392,14 +392,14 @@
 <ng-template #educationsFieldsetRef [formGroup]="resumeForm">
   <fieldset class="fieldset mt-4" formArrayName="educations">
     <legend class="legend">
-      {{ educationsLabel }}
+      {{ label.educations }}
     </legend>
 
     <div class="flex justify-end">
       <button
         mat-mini-fab
         color="accent"
-        matTooltip="{{ addEducationLabel }}"
+        matTooltip="{{ label.addEducation }}"
         matTooltipPosition="above"
         type="button"
         (click)="addEducation()"
@@ -416,13 +416,13 @@
       [formGroupName]="$index"
     >
       <legend class="font-normal capitalize px-2 text-slate-500">
-        {{ educationLabel }} ◦ {{ $index + 1 }}
+        {{ label.education }} ◦ {{ $index + 1 }}
       </legend>
       <div class="flex">
         <div class="flex-1">
           <!-- Institution -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ educationInstitutionLabel }}</mat-label>
+            <mat-label>{{ label.educationInstitution }}</mat-label>
             <input
               matInput
               type="text"
@@ -433,7 +433,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="educationInstitutionRef.value = ''"
             >
@@ -455,7 +455,7 @@
           </mat-form-field>
           <!-- Title -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ educationTitleLabel }}</mat-label>
+            <mat-label>{{ label.educationTitle }}</mat-label>
             <input
               matInput
               type="text"
@@ -466,7 +466,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="educationTitleRef.value = ''"
             >
@@ -491,7 +491,7 @@
           <button
             mat-mini-fab
             color="primary"
-            matTooltip="{{ removeEducationLabel }}"
+            matTooltip="{{ label.removeEducation }}"
             matTooltipPosition="above"
             type="button"
             (click)="removeEducation($index)"
@@ -510,14 +510,14 @@
 <ng-template #certificationsFieldsetRef [formGroup]="resumeForm">
   <fieldset class="fieldset mt-4" formArrayName="certifications">
     <legend class="legend">
-      {{ certificationsLabel }}
+      {{ label.certifications }}
     </legend>
 
     <div class="flex justify-end">
       <button
         mat-mini-fab
         color="accent"
-        matTooltip="{{ addCertificationLabel }}"
+        matTooltip="{{ label.addCertification }}"
         matTooltipPosition="above"
         type="button"
         (click)="addCertification()"
@@ -534,13 +534,13 @@
       [formGroupName]="$index"
     >
       <legend class="font-normal capitalize px-2 text-slate-500">
-        {{ certificationLabel }} ◦ {{ $index + 1 }}
+        {{ label.certification }} ◦ {{ $index + 1 }}
       </legend>
       <div class="flex">
         <div class="flex-1">
           <!-- Institution -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ certificationInstitutionLabel }}</mat-label>
+            <mat-label>{{ label.certificationInstitution }}</mat-label>
             <input
               matInput
               type="text"
@@ -551,7 +551,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="CertificationInstitutionRef.value = ''"
             >
@@ -573,7 +573,7 @@
           </mat-form-field>
           <!-- Title -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ certificationTitleLabel }}</mat-label>
+            <mat-label>{{ label.certificationTitle }}</mat-label>
             <input
               matInput
               type="text"
@@ -584,7 +584,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="CertificationTitleRef.value = ''"
             >
@@ -606,14 +606,14 @@
           </mat-form-field>
           <!-- Date -->
           <mat-form-field class="w-full">
-            <mat-label>{{ certificationDateLabel }}</mat-label>
+            <mat-label>{{ label.certificationDate }}</mat-label>
             <input
               matInput
               [max]="maxDate"
               [matDatepicker]="matDatepickerRef"
               formControlName="date"
             />
-            <mat-hint>{{ certificationDateHintLabel }}</mat-hint>
+            <mat-hint>{{ label.certificationDateHint }}</mat-hint>
             <mat-datepicker-toggle
               matIconSuffix
               [for]="matDatepickerRef"
@@ -630,7 +630,7 @@
           <button
             mat-mini-fab
             color="primary"
-            matTooltip="{{ removeCertificationLabel }}"
+            matTooltip="{{ label.removeCertification }}"
             matTooltipPosition="above"
             type="button"
             (click)="removeCertification($index)"
@@ -649,14 +649,14 @@
 <ng-template #experiencesFieldsetRef [formGroup]="resumeForm">
   <fieldset class="fieldset mt-4" formArrayName="experiences">
     <legend class="legend">
-      {{ experiencesLabel }}
+      {{ label.experiences }}
     </legend>
 
     <div class="flex justify-end">
       <button
         mat-mini-fab
         color="accent"
-        matTooltip="{{ addExperienceLabel }}"
+        matTooltip="{{ label.addExperience }}"
         matTooltipPosition="above"
         type="button"
         (click)="addExperience()"
@@ -673,13 +673,13 @@
       [formGroupName]="$index"
     >
       <legend class="font-normal capitalize px-2 text-slate-500">
-        {{ experienceLabel }} ◦ {{ $index + 1 }}
+        {{ label.experience }} ◦ {{ $index + 1 }}
       </legend>
       <div class="flex">
         <div class="flex-1">
           <!-- Role title -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ experienceRoleTitleLabel }}</mat-label>
+            <mat-label>{{ label.experienceRoleTitle }}</mat-label>
             <input
               matInput
               type="text"
@@ -690,7 +690,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="experienceRoleTitleRef.value = ''"
             >
@@ -712,7 +712,7 @@
           </mat-form-field>
           <!-- Company -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ experienceCompanyLabel }}</mat-label>
+            <mat-label>{{ label.experienceCompany }}</mat-label>
             <input
               matInput
               type="text"
@@ -723,7 +723,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="experienceCompanyRef.value = ''"
             >
@@ -745,7 +745,7 @@
           </mat-form-field>
           <!-- Project -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ experienceProjectLabel }}</mat-label>
+            <mat-label>{{ label.experienceProject }}</mat-label>
             <input
               matInput
               type="text"
@@ -756,7 +756,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="experienceProjectRef.value = ''"
             >
@@ -785,18 +785,18 @@
             >
               <input
                 matStartDate
-                placeholder="{{ experienceStartDateLabel }}"
+                placeholder="{{ label.experienceStartDate }}"
                 formControlName="startDate"
               />
               <input
                 matEndDate
-                placeholder="{{ experienceEndDateLabel }}"
+                placeholder="{{ label.experienceEndDate }}"
                 formControlName="endDate"
               />
             </mat-date-range-input>
             <mat-hint
-              >{{ experienceDateHintLabel }} -
-              {{ experienceDateHintLabel }}</mat-hint
+              >{{ label.experienceDateHint }} -
+              {{ label.experienceDateHint }}</mat-hint
             >
             <mat-datepicker-toggle
               matIconSuffix
@@ -810,7 +810,7 @@
           </mat-form-field>
           <!-- Technical environment -->
           <mat-form-field class="w-full" color="primary">
-            <mat-label>{{ experienceTechnicalEnvironmentLabel }}</mat-label>
+            <mat-label>{{ label.experienceTechnicalEnvironment }}</mat-label>
             <input
               matInput
               type="text"
@@ -821,7 +821,7 @@
             <button
               matSuffix
               mat-icon-button
-              matTooltip="{{ clearLabel }}"
+              matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
               (click)="experienceTechnicalEnvironmentRef.value = ''"
             >
@@ -847,13 +847,13 @@
             formArrayName="skills"
           >
             <legend class="font-normal capitalize px-2 text-slate-500">
-              {{ experienceSkillsLabel }}
+              {{ label.experienceSkills }}
             </legend>
             <div class="flex justify-end">
               <button
                 mat-mini-fab
                 color="accent"
-                matTooltip="{{ addSkillToExperienceLabel }}"
+                matTooltip="{{ label.addSkillToExperience }}"
                 matTooltipPosition="above"
                 type="button"
                 (click)="addSkillToExperience($index)"
@@ -870,7 +870,7 @@
               <div class="flex-1">
                 <!-- Skill -->
                 <mat-form-field class="w-full" color="primary">
-                  <mat-label>{{ experienceSkillLabel }}</mat-label>
+                  <mat-label>{{ label.experienceSkill }}</mat-label>
                   <input
                     matInput
                     type="text"
@@ -881,7 +881,7 @@
                   <button
                     matSuffix
                     mat-icon-button
-                    matTooltip="{{ clearLabel }}"
+                    matTooltip="{{ label.clear }}"
                     matTooltipPosition="above"
                     (click)="experienceSkillRef.value = ''"
                   >
@@ -907,7 +907,7 @@
                 <button
                   mat-mini-fab
                   color="primary"
-                  matTooltip="{{ removeSkillLabel }}"
+                  matTooltip="{{ label.removeSkill }}"
                   matTooltipPosition="above"
                   type="button"
                   (click)="removeFromExperienceSkill($index, $skillIndex)"
@@ -926,7 +926,7 @@
           <button
             mat-mini-fab
             color="primary"
-            matTooltip="{{ removeExperienceLabel }}"
+            matTooltip="{{ label.removeExperience }}"
             matTooltipPosition="above"
             type="button"
             (click)="removeExperience($index)"
@@ -952,7 +952,7 @@
       (click)="matAccordion.openAll()"
     >
       <mat-icon class="mr-4">unfold_more</mat-icon>
-      {{ expandAllLabel }}
+      {{ label.expandAll }}
     </button>
     <button
       mat-stroked-button
@@ -961,7 +961,7 @@
       (click)="matAccordion.closeAll()"
     >
       <mat-icon class="mr-4">unfold_less</mat-icon>
-      {{ collapseAllLabel }}
+      {{ label.collapseAll }}
     </button>
   </div>
 </ng-template>
@@ -976,7 +976,7 @@
       [disabled]="resumeForm.invalid"
     >
       <mat-icon class="mr-4">send</mat-icon>
-      {{ submitLabel }}
+      {{ label.submit }}
     </button>
   </div>
 </ng-template>
@@ -984,12 +984,12 @@
 <!-- ••[3]••••• Form errors •••••••••• -->
 <ng-template #formErrorsRef let-formControl>
   @if (formControl.hasError('required')) {
-  {{ requiredErrorFieldLabel }}
+  {{ label.requiredErrorField }}
   } @else if (formControl.hasError('minlength')) {
 
   {{ minLengthErrorFieldLabel(formControl.errors) }}
 
   } @else if (formControl.hasError('pattern')) {
-  {{ patternErrorFieldLabel }}
+  {{ label.patternErrorField }}
   }
 </ng-template>

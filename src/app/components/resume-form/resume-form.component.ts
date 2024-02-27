@@ -26,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RESUME_FORM_LABELS } from './resume-form.labels';
 
 type ContactFormGroupT = FormGroup<{
   name: FormControl<ContactT['name']>;
@@ -97,12 +98,8 @@ export class ResumeFormComponent {
 
   /* ••[2]•••••••••• Labels ••••••••••••••• */
 
-  protected expandAllLabel: string = 'Expand all';
-  protected collapseAllLabel: string = 'Collapse all';
-  protected clearLabel: string = 'Clear';
-  protected submitLabel: string = 'Submit';
-
-  protected requiredErrorFieldLabel: string = 'This field is required';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected label: any = RESUME_FORM_LABELS;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected minLengthErrorFieldLabel: (error: any) => string = (
@@ -111,76 +108,6 @@ export class ResumeFormComponent {
   ): string => {
     return `This field should be ${error.minlength.requiredLength} characters long`;
   };
-
-  protected patternErrorFieldLabel: string = 'Invalid character on this field';
-
-  /* ••[3]••••• Contact •••••••••• */
-
-  protected contactLabel: string = 'Contact';
-  protected contactNameLabel: string = 'Name';
-  protected contactTitleLabel: string = 'Title';
-
-  /* ••[3]••••• Profile •••••••••• */
-
-  protected profileLabel: string = 'Profile';
-  protected profileDescriptionLabel: string = 'Description';
-
-  /* ••[3]••••• Capabilities •••••••••• */
-
-  protected addCapabilityLabel: string = 'Add capability';
-  protected removeCapabilityLabel: string = 'Remove capability';
-  protected capabilitiesLabel: string = 'Capabilities';
-  protected capabilityLabel: string = 'Capability';
-  protected capabilityDescriptionLabel: string = 'Description';
-  protected capabilityTitleLabel: string = 'Title';
-
-  /* ••[3]••••• Skills •••••••••• */
-
-  protected addSkillLabel: string = 'Add skill';
-  protected removeSkillLabel: string = 'Remove skill';
-  protected skillsLabel: string = 'Skills';
-  protected skillLabel: string = 'Skill';
-
-  /* ••[3]••••• Educations •••••••••• */
-
-  protected addEducationLabel: string = 'Add education';
-  protected removeEducationLabel: string = 'Remove education';
-  protected educationsLabel: string = 'Educations';
-  protected educationLabel: string = 'Education';
-  protected educationInstitutionLabel: string = 'Institution';
-  protected educationTitleLabel: string = 'Title';
-
-  /* ••[3]••••• Certifications •••••••••• */
-
-  protected addCertificationLabel: string = 'Add certification';
-  protected removeCertificationLabel: string = 'Remove certification';
-  protected certificationsLabel: string = 'Certifications';
-  protected certificationLabel: string = 'Certification';
-  protected certificationDateLabel: string = 'Date of completion';
-  protected certificationDateHintLabel: string = 'MM/DD/YYYY';
-  protected certificationInstitutionLabel: string = 'Institution';
-  protected certificationTitleLabel: string = 'Title';
-
-  /* ••[3]••••• Experiences •••••••••• */
-
-  protected addExperienceLabel: string = 'Add experience';
-  protected removeExperienceLabel: string = 'Remove experience';
-  protected addSkillToExperienceLabel: string = 'Add skill to experience';
-  protected removeSkillFromExperienceLabel: string =
-    'Remove skill from experience';
-
-  protected experiencesLabel: string = 'Experiences';
-  protected experienceLabel: string = 'Experience';
-  protected experienceDateHintLabel: string = 'MM/DD/YYYY';
-  protected experienceCompanyLabel: string = 'Company';
-  protected experienceEndDateLabel: string = 'End date';
-  protected experienceProjectLabel: string = 'Project';
-  protected experienceRoleTitleLabel: string = 'Role title';
-  protected experienceSkillsLabel: string = 'Skills';
-  protected experienceSkillLabel: string = 'Skill';
-  protected experienceStartDateLabel: string = 'Start date';
-  protected experienceTechnicalEnvironmentLabel: string =
-    'Technical environment';
 
   private sentenceValidators: Array<ValidatorFn> = [
     Validators.required,
