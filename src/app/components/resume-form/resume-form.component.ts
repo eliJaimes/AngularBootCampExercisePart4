@@ -1,15 +1,6 @@
 /* ••[1]••••••••••••••••••••••••• resume-form.component.ts •••••••••••••••••••••••••••••• */
 
 import {
-  CAPABILITIES,
-  CERTIFICATIONS,
-  CONTACT,
-  EDUCATIONS,
-  EXPERIENCES,
-  PROFILE,
-  SKILLS,
-} from './resume-form.data';
-import {
   CapabilityFormGroupT,
   CertificationFormGroupT,
   EducationFormGroupT,
@@ -22,6 +13,7 @@ import {
   CertificationT,
   EducationT,
   ExperienceT,
+  ResumeFormT,
   SkillT,
 } from '../../entities/resumeForm.type';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
@@ -46,6 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RESUME_FORM_LABELS } from './resume-form.labels';
+import { RESUME_FORM_TEST_VALUE } from './resume-form.data';
 
 @Component({
   imports: [
@@ -497,16 +490,16 @@ export class ResumeFormComponent {
     this.matExpansionPanels.get(0)?.open();
   }
 
-  protected loadTestData(): void {
+  private loadData(resumeFormValue: ResumeFormT): void {
     this.resetForm();
     this.matAccordion.openAll();
 
     this.resumeForm.patchValue({
-      contact: CONTACT,
-      profile: PROFILE,
+      contact: resumeFormValue.contact,
+      profile: resumeFormValue.profile,
     });
 
-    CAPABILITIES.forEach(
+    resumeFormValue.capabilities.forEach(
       (capability: CapabilityT, capabilityIndex: number): void => {
         this.createCapability(
           capability,
@@ -516,17 +509,19 @@ export class ResumeFormComponent {
       }
     );
 
-    SKILLS.forEach((skill: SkillT, skillIndex: number): void => {
-      this.createSkill(skill, skillIndex, skillIndex !== 0);
-    });
+    resumeFormValue.skills.forEach(
+      (skill: SkillT, skillIndex: number): void => {
+        this.createSkill(skill, skillIndex, skillIndex !== 0);
+      }
+    );
 
-    EDUCATIONS.forEach(
+    resumeFormValue.educations.forEach(
       (education: EducationT, educationIndex: number): void => {
         this.createEducation(education, educationIndex, educationIndex !== 0);
       }
     );
 
-    CERTIFICATIONS.forEach(
+    resumeFormValue.certifications.forEach(
       (certification: CertificationT, certificationIndex: number): void => {
         this.createCertification(
           certification,
@@ -536,7 +531,7 @@ export class ResumeFormComponent {
       }
     );
 
-    EXPERIENCES.forEach(
+    resumeFormValue.experiences.forEach(
       (experience: ExperienceT, experienceIndex: number): void => {
         this.createExperience(
           experience,
@@ -547,6 +542,32 @@ export class ResumeFormComponent {
     );
 
     this.resumeForm.updateValueAndValidity();
+  }
+
+  protected loadTestData(): void {
+    this.loadData(RESUME_FORM_TEST_VALUE);
+  }
+
+  protected loadForm(): void {
+    try {
+      const resumeFormValue: ResumeFormT = JSON.parse(
+        localStorage.getItem('resumeFormValue') as string
+      );
+
+      if (resumeFormValue) {
+        this.loadData(resumeFormValue);
+      } else {
+        console.error('resumeFormValue is null');
+      }
+    } catch (error) {
+      console.error('Error when parsing resumeFormValue');
+    }
+  }
+
+  protected saveForm(): void {
+    const resumeFormValue: ResumeFormT = this.resumeForm.getRawValue();
+
+    localStorage.setItem('resumeFormValue', JSON.stringify(resumeFormValue));
   }
 
   protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {

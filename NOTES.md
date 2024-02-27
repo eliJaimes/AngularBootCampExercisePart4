@@ -271,3 +271,9 @@ https://material.angular.io/components/expansion/overview
 ## Fix issues with form, not creating form initial state when reset
 
 - We need to destroy dynamically created items on the form to recreate initial state
+
+## Add save and load functionality
+
+- Add save functionality
+- Add load functionality while refactoring loadTestData method
+- Fix clear input buttons, since we do not declare them as type button

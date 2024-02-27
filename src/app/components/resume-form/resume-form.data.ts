@@ -7,20 +7,21 @@ import {
   EducationT,
   ExperienceT,
   ProfileT,
+  ResumeFormT,
   SkillT,
 } from '../../entities/resumeForm.type';
 
-export const CONTACT: ContactT = {
+const CONTACT: ContactT = {
   name: 'Eli Jaimes',
   title: 'Practice Manager',
 };
 
-export const PROFILE: ProfileT = {
+const PROFILE: ProfileT = {
   description:
     'I am a Computer Engineer who combines creativity and logic to design and develop user experiences (UX), knowledge-based programming, software architecture, organization, and project implementation. I am constantly seeking new skills and knowledge to enhance my expertise.',
 };
 
-export const CAPABILITIES: Array<CapabilityT> = [
+const CAPABILITIES: Array<CapabilityT> = [
   {
     description:
       'Design and develop software that offers users with significant and appropriate experiences',
@@ -38,7 +39,7 @@ export const CAPABILITIES: Array<CapabilityT> = [
   },
 ];
 
-export const SKILLS: Array<SkillT> = [
+const SKILLS: Array<SkillT> = [
   'AJAX',
   'Angular',
   'CSS',
@@ -61,7 +62,7 @@ export const SKILLS: Array<SkillT> = [
   'XML',
 ];
 
-export const EDUCATIONS: Array<EducationT> = [
+const EDUCATIONS: Array<EducationT> = [
   {
     institution: '2009 - 10 • Graduate in Business Management',
     title:
@@ -79,7 +80,7 @@ export const EDUCATIONS: Array<EducationT> = [
   },
 ];
 
-export const CERTIFICATIONS: Array<CertificationT> = [
+const CERTIFICATIONS: Array<CertificationT> = [
   {
     date: new Date('01,01,2021'),
     institution: '2021 • Certified Node.js Application Developer',
@@ -99,7 +100,7 @@ export const CERTIFICATIONS: Array<CertificationT> = [
   },
 ];
 
-export const EXPERIENCES: Array<ExperienceT> = [
+const EXPERIENCES: Array<ExperienceT> = [
   {
     company: 'Apex Systems',
     endDate: new Date(),
@@ -214,3 +215,13 @@ export const EXPERIENCES: Array<ExperienceT> = [
     technicalEnvironment: 'Angular JS, REST and SOAP APIs, Sass.',
   },
 ];
+
+export const RESUME_FORM_TEST_VALUE: ResumeFormT = {
+  capabilities: CAPABILITIES,
+  certifications: CERTIFICATIONS,
+  contact: CONTACT,
+  educations: EDUCATIONS,
+  experiences: EXPERIENCES,
+  profile: PROFILE,
+  skills: SKILLS,
+};

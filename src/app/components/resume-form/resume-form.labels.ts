@@ -7,6 +7,8 @@ export const RESUME_FORM_LABELS: Record<string, string> = {
   collapseAll: 'Collapse all',
   clear: 'Clear',
   loadTestData: 'Load test data',
+  save: 'Save',
+  load: 'Load',
   reset: 'Reset',
   submit: 'Submit',
   requiredErrorField: 'This field is required',

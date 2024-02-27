@@ -113,6 +113,7 @@
       <input matInput type="text" formControlName="name" #contactNameRef />
       @if (contactNameRef.value) {
       <button
+        type="button"
         matSuffix
         mat-icon-button
         matTooltip="{{ label.clear }}"
@@ -137,6 +138,7 @@
       <input matInput type="text" formControlName="title" #contactTitleRef />
       @if (contactTitleRef.value) {
       <button
+        type="button"
         matSuffix
         mat-icon-button
         matTooltip="{{ label.clear }}"
@@ -175,6 +177,7 @@
       />
       @if (profileDescriptionRef.value) {
       <button
+        type="button"
         matSuffix
         mat-icon-button
         matTooltip="{{ label.clear }}"
@@ -207,6 +210,7 @@
 
     <div class="flex justify-end">
       <button
+        type="button"
         mat-mini-fab
         color="accent"
         matTooltip="{{ label.addCapability }}"
@@ -241,6 +245,7 @@
             />
             @if (capabilityTitleRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -277,6 +282,7 @@
             />
             @if (capabilityDescriptionRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -307,6 +313,7 @@
         @if ($count > 1) {
         <div class="ml-4">
           <button
+            type="button"
             mat-mini-fab
             color="primary"
             matTooltip="{{ label.removeCapability }}"
@@ -333,6 +340,7 @@
 
     <div class="flex justify-end">
       <button
+        type="button"
         mat-mini-fab
         color="accent"
         matTooltip="{{ label.addSkill }}"
@@ -355,6 +363,7 @@
           <input matInput type="text" [formControlName]="$index" #skillRef />
           @if (skillRef.value) {
           <button
+            type="button"
             matSuffix
             mat-icon-button
             matTooltip="{{ label.clear }}"
@@ -379,6 +388,7 @@
       @if ($count > 1) {
       <div class="ml-4">
         <button
+          type="button"
           mat-mini-fab
           color="primary"
           matTooltip="{{ label.removeSkill }}"
@@ -405,6 +415,7 @@
 
     <div class="flex justify-end">
       <button
+        type="button"
         mat-mini-fab
         color="accent"
         matTooltip="{{ label.addEducation }}"
@@ -439,6 +450,7 @@
             />
             @if (educationInstitutionRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -476,6 +488,7 @@
             />
             @if (educationTitleRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -503,6 +516,7 @@
         @if ($count > 1) {
         <div class="ml-4">
           <button
+            type="button"
             mat-mini-fab
             color="primary"
             matTooltip="{{ label.removeEducation }}"
@@ -529,6 +543,7 @@
 
     <div class="flex justify-end">
       <button
+        type="button"
         mat-mini-fab
         color="accent"
         matTooltip="{{ label.addCertification }}"
@@ -563,6 +578,7 @@
             />
             @if (CertificationInstitutionRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -600,6 +616,7 @@
             />
             @if (CertificationTitleRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -650,6 +667,7 @@
         @if ($count > 1) {
         <div class="ml-4">
           <button
+            type="button"
             mat-mini-fab
             color="primary"
             matTooltip="{{ label.removeCertification }}"
@@ -676,6 +694,7 @@
 
     <div class="flex justify-end">
       <button
+        type="button"
         mat-mini-fab
         color="accent"
         matTooltip="{{ label.addExperience }}"
@@ -710,6 +729,7 @@
             />
             @if (experienceRoleTitleRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -747,6 +767,7 @@
             />
             @if (experienceCompanyRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -784,6 +805,7 @@
             />
             @if (experienceProjectRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -853,6 +875,7 @@
             />
             @if (experienceTechnicalEnvironmentRef.value) {
             <button
+              type="button"
               matSuffix
               mat-icon-button
               matTooltip="{{ label.clear }}"
@@ -889,6 +912,7 @@
             </legend>
             <div class="flex justify-end">
               <button
+                type="button"
                 mat-mini-fab
                 color="accent"
                 matTooltip="{{ label.addSkillToExperience }}"
@@ -917,6 +941,7 @@
                   />
                   @if (experienceSkillRef.value) {
                   <button
+                    type="button"
                     matSuffix
                     mat-icon-button
                     matTooltip="{{ label.clear }}"
@@ -948,6 +973,7 @@
               @if ($count > 1) {
               <div class="ml-4">
                 <button
+                  type="button"
                   mat-mini-fab
                   color="primary"
                   matTooltip="{{ label.removeSkill }}"
@@ -967,6 +993,7 @@
         @if ($count > 1) {
         <div class="ml-4">
           <button
+            type="button"
             mat-mini-fab
             color="primary"
             matTooltip="{{ label.removeExperience }}"
@@ -988,6 +1015,7 @@
 <ng-template #accordionActionsRef>
   <div class="mb-4 flex justify-end">
     <button
+      type="button"
       mat-stroked-button
       class="mr-4"
       color="primary"
@@ -998,6 +1026,7 @@
       {{ label.expandAll }}
     </button>
     <button
+      type="button"
       mat-stroked-button
       color="primary"
       type="button"
@@ -1024,13 +1053,37 @@
         {{ label.reset }}
       </button>
       <button
+        type="button"
         mat-stroked-button
+        class="mr-4"
         color="primary"
         type="button"
         (click)="loadTestData()"
       >
         <mat-icon class="mr-4">science</mat-icon>
         {{ label.loadTestData }}
+      </button>
+      <button
+        type="button"
+        mat-stroked-button
+        class="mr-4"
+        color="primary"
+        type="button"
+        (click)="loadForm()"
+      >
+        <mat-icon class="mr-4">cloud_download</mat-icon>
+        {{ label.load }}
+      </button>
+      <button
+        type="button"
+        mat-stroked-button
+        class="mr-4"
+        color="primary"
+        type="button"
+        (click)="saveForm()"
+      >
+        <mat-icon class="mr-4">cloud_upload</mat-icon>
+        {{ label.save }}
       </button>
     </div>
     <button
