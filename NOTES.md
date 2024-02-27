@@ -263,3 +263,7 @@ https://material.angular.io/components/expansion/overview
 - Lets create some functionality to reset the form
 - Lets create some functionality to load test data as developer helper functionality. We will remove this at some point.
 - Comment Validators.pattern from sentenceValidators and extendedSentenceValidators properties, you can enable with a better regex pattern when you needed
+
+## Fix issues with form, inputs not clearing form model
+
+- When we clear the Angular Material Input we are not updating the form data, we need to fix it

@@ -117,7 +117,7 @@
         mat-icon-button
         matTooltip="{{ label.clear }}"
         matTooltipPosition="above"
-        (click)="contactNameRef.value = ''"
+        (click)="resumeForm.controls.contact.controls.name.reset()"
       >
         <mat-icon>close</mat-icon>
       </button>
@@ -141,7 +141,7 @@
         mat-icon-button
         matTooltip="{{ label.clear }}"
         matTooltipPosition="above"
-        (click)="contactTitleRef.value = ''"
+        (click)="resumeForm.controls.contact.controls.title.reset()"
       >
         <mat-icon>close</mat-icon>
       </button>
@@ -179,7 +179,7 @@
         mat-icon-button
         matTooltip="{{ label.clear }}"
         matTooltipPosition="above"
-        (click)="profileDescriptionRef.value = ''"
+        (click)="resumeForm.controls.profile.controls.description.reset()"
       >
         <mat-icon>close</mat-icon>
       </button>
@@ -245,7 +245,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="capabilityTitleRef.value = ''"
+              (click)="
+                resumeForm.controls.capabilities
+                  .at($index)
+                  .controls.title.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -277,7 +281,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="capabilityDescriptionRef.value = ''"
+              (click)="
+                resumeForm.controls.capabilities
+                  .at($index)
+                  .controls.description.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -351,7 +359,7 @@
             mat-icon-button
             matTooltip="{{ label.clear }}"
             matTooltipPosition="above"
-            (click)="skillRef.value = ''"
+            (click)="resumeForm.controls.skills.at($index).reset()"
           >
             <mat-icon>close</mat-icon>
           </button>
@@ -435,7 +443,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="educationInstitutionRef.value = ''"
+              (click)="
+                resumeForm.controls.educations
+                  .at($index)
+                  .controls.institution.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -468,7 +480,9 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="educationTitleRef.value = ''"
+              (click)="
+                resumeForm.controls.educations.at($index).controls.title.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -553,7 +567,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="CertificationInstitutionRef.value = ''"
+              (click)="
+                resumeForm.controls.certifications
+                  .at($index)
+                  .controls.institution.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -586,7 +604,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="CertificationTitleRef.value = ''"
+              (click)="
+                resumeForm.controls.certifications
+                  .at($index)
+                  .controls.title.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -692,7 +714,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="experienceRoleTitleRef.value = ''"
+              (click)="
+                resumeForm.controls.experiences
+                  .at($index)
+                  .controls.roleTitle.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -725,7 +751,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="experienceCompanyRef.value = ''"
+              (click)="
+                resumeForm.controls.experiences
+                  .at($index)
+                  .controls.company.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -758,7 +788,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="experienceProjectRef.value = ''"
+              (click)="
+                resumeForm.controls.experiences
+                  .at($index)
+                  .controls.project.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -823,7 +857,11 @@
               mat-icon-button
               matTooltip="{{ label.clear }}"
               matTooltipPosition="above"
-              (click)="experienceTechnicalEnvironmentRef.value = ''"
+              (click)="
+                resumeForm.controls.experiences
+                  .at($index)
+                  .controls.technicalEnvironment.reset()
+              "
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -883,7 +921,12 @@
                     mat-icon-button
                     matTooltip="{{ label.clear }}"
                     matTooltipPosition="above"
-                    (click)="experienceSkillRef.value = ''"
+                    (click)="
+                      resumeForm.controls.experiences
+                        .at($index)
+                        .controls.skills.at($skillIndex)
+                        .reset()
+                    "
                   >
                     <mat-icon>close</mat-icon>
                   </button>
