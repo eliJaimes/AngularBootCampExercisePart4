@@ -251,3 +251,9 @@ https://material.angular.io/components/expansion/overview
 ## Refactor, isolate internal types to a file
 
 - Lets create a file that contains all ResumeFormComponent internal types
+
+## Refactor ResumeFormComponent to reuse code where possible
+
+- Let's reuse code where we can on ResumeFormComponent class
+
+- Note: we should reduce ResumeFormComponent template, we can achieve this by creating multiple small components that handle the UI. However when involving a form, this enhance involve several advance concepts outside the context of this course.

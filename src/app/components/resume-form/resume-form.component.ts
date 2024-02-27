@@ -77,43 +77,11 @@ export class ResumeFormComponent {
 
   protected resumeForm: ResumeFormGroupT = new FormGroup({
     capabilities: new FormArray(
-      [
-        new FormGroup({
-          description: new FormControl('', {
-            nonNullable: true,
-            validators: this.extendedSentenceValidators,
-          }),
-          title: new FormControl('', {
-            nonNullable: true,
-            validators: this.sentenceValidators,
-          }),
-        }),
-      ],
+      [this.getNewCapability()],
       Validators.minLength(1)
     ),
     certifications: new FormArray(
-      [
-        new FormGroup({
-          date: new FormControl<Date>(
-            {
-              disabled: true,
-              value: new Date(),
-            },
-            {
-              nonNullable: true,
-              validators: Validators.required,
-            }
-          ),
-          institution: new FormControl('', {
-            nonNullable: true,
-            validators: this.extendedSentenceValidators,
-          }),
-          title: new FormControl('', {
-            nonNullable: true,
-            validators: this.sentenceValidators,
-          }),
-        }),
-      ],
+      [this.getNewCertification()],
       Validators.minLength(1)
     ),
     contact: new FormGroup({
@@ -127,58 +95,11 @@ export class ResumeFormComponent {
       }),
     }),
     educations: new FormArray(
-      [
-        new FormGroup({
-          institution: new FormControl('', {
-            nonNullable: true,
-            validators: this.extendedSentenceValidators,
-          }),
-          title: new FormControl('', {
-            nonNullable: true,
-            validators: this.sentenceValidators,
-          }),
-        }),
-      ],
+      [this.getNewEducation()],
       Validators.minLength(1)
     ),
     experiences: new FormArray(
-      [
-        new FormGroup({
-          company: new FormControl('', {
-            nonNullable: true,
-            validators: this.extendedSentenceValidators,
-          }),
-          endDate: new FormControl<Date>(new Date(), {
-            nonNullable: true,
-            validators: Validators.required,
-          }),
-          project: new FormControl('', {
-            nonNullable: true,
-            validators: this.extendedSentenceValidators,
-          }),
-          roleTitle: new FormControl('', {
-            nonNullable: true,
-            validators: this.sentenceValidators,
-          }),
-          skills: new FormArray(
-            [
-              new FormControl('', {
-                nonNullable: true,
-                validators: this.sentenceValidators,
-              }),
-            ],
-            Validators.minLength(1)
-          ),
-          startDate: new FormControl<Date>(new Date(), {
-            nonNullable: true,
-            validators: Validators.required,
-          }),
-          technicalEnvironment: new FormControl('', {
-            nonNullable: true,
-            validators: this.extendedSentenceValidators,
-          }),
-        }),
-      ],
+      [this.getNewExperience()],
       Validators.minLength(1)
     ),
     profile: new FormGroup({
@@ -187,21 +108,13 @@ export class ResumeFormComponent {
         validators: this.extendedSentenceValidators,
       }),
     }),
-    skills: new FormArray(
-      [
-        new FormControl('', {
-          nonNullable: true,
-          validators: this.sentenceValidators,
-        }),
-      ],
-      Validators.minLength(1)
-    ),
+    skills: new FormArray([this.getNewSkill()], Validators.minLength(1)),
   });
 
   /* ••[2]•••••••••• Capabilities ••••••••••••••• */
 
-  protected addCapability(): void {
-    const newCapability: CapabilityFormGroupT = new FormGroup({
+  private getNewCapability(): CapabilityFormGroupT {
+    return new FormGroup({
       description: new FormControl('', {
         nonNullable: true,
         validators: this.extendedSentenceValidators,
@@ -211,8 +124,10 @@ export class ResumeFormComponent {
         validators: this.sentenceValidators,
       }),
     });
+  }
 
-    this.resumeForm.controls.capabilities.push(newCapability);
+  protected addCapability(): void {
+    this.resumeForm.controls.capabilities.push(this.getNewCapability());
   }
 
   protected removeCapability(capabilityIndex: number): void {
@@ -222,14 +137,15 @@ export class ResumeFormComponent {
   }
 
   /* ••[2]•••••••••• Skills ••••••••••••••• */
-
-  protected addSkill(): void {
-    const newSkill: SkillFormControlT = new FormControl('', {
+  private getNewSkill(): SkillFormControlT {
+    return new FormControl('', {
       nonNullable: true,
       validators: this.sentenceValidators,
     });
+  }
 
-    this.resumeForm.controls.skills.push(newSkill);
+  protected addSkill(): void {
+    this.resumeForm.controls.skills.push(this.getNewSkill());
   }
 
   protected removeSkill(skillIndex: number): void {
@@ -240,8 +156,8 @@ export class ResumeFormComponent {
 
   /* ••[2]•••••••••• Educations ••••••••••••••• */
 
-  protected addEducation(): void {
-    const newEducation: EducationFormGroupT = new FormGroup({
+  private getNewEducation(): EducationFormGroupT {
+    return new FormGroup({
       institution: new FormControl('', {
         nonNullable: true,
         validators: this.extendedSentenceValidators,
@@ -251,8 +167,10 @@ export class ResumeFormComponent {
         validators: this.sentenceValidators,
       }),
     });
+  }
 
-    this.resumeForm.controls.educations.push(newEducation);
+  protected addEducation(): void {
+    this.resumeForm.controls.educations.push(this.getNewEducation());
   }
 
   protected removeEducation(educationIndex: number): void {
@@ -263,8 +181,8 @@ export class ResumeFormComponent {
 
   /* ••[2]•••••••••• Certifications ••••••••••••••• */
 
-  protected addCertification(): void {
-    const newCertification: CertificationFormGroupT = new FormGroup({
+  private getNewCertification(): CertificationFormGroupT {
+    return new FormGroup({
       date: new FormControl<Date>(
         {
           disabled: true,
@@ -284,8 +202,10 @@ export class ResumeFormComponent {
         validators: this.sentenceValidators,
       }),
     });
+  }
 
-    this.resumeForm.controls.certifications.push(newCertification);
+  protected addCertification(): void {
+    this.resumeForm.controls.certifications.push(this.getNewCertification());
   }
 
   protected removeCertification(certificationIndex: number): void {
@@ -296,8 +216,8 @@ export class ResumeFormComponent {
 
   /* ••[2]•••••••••• Experiences ••••••••••••••• */
 
-  protected addExperience(): void {
-    const newExperience: ExperienceFormGroupT = new FormGroup({
+  private getNewExperience(): ExperienceFormGroupT {
+    return new FormGroup({
       company: new FormControl('', {
         nonNullable: true,
         validators: this.extendedSentenceValidators,
@@ -315,12 +235,7 @@ export class ResumeFormComponent {
         validators: this.sentenceValidators,
       }),
       skills: new FormArray(
-        [
-          new FormControl('', {
-            nonNullable: true,
-            validators: this.sentenceValidators,
-          }),
-        ],
+        [this.getNewSkillToExperience()],
         Validators.minLength(1)
       ),
       startDate: new FormControl<Date>(new Date(), {
@@ -332,8 +247,10 @@ export class ResumeFormComponent {
         validators: this.extendedSentenceValidators,
       }),
     });
+  }
 
-    this.resumeForm.controls.experiences.push(newExperience);
+  protected addExperience(): void {
+    this.resumeForm.controls.experiences.push(this.getNewExperience());
   }
 
   protected removeExperience(experienceIndex: number): void {
@@ -342,15 +259,17 @@ export class ResumeFormComponent {
     }
   }
 
-  protected addSkillToExperience(experienceIndex: number): void {
-    const newSkillToExperience: SkillFormControlT = new FormControl('', {
+  private getNewSkillToExperience(): SkillFormControlT {
+    return new FormControl('', {
       nonNullable: true,
       validators: this.sentenceValidators,
     });
+  }
 
+  protected addSkillToExperience(experienceIndex: number): void {
     this.resumeForm.controls.experiences
       .at(experienceIndex)
-      .controls.skills.push(newSkillToExperience);
+      .controls.skills.push(this.getNewSkillToExperience());
   }
 
   protected removeFromExperienceSkill(
