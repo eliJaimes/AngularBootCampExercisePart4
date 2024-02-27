@@ -208,10 +208,16 @@ export class ResumeFormComponent {
     certifications: new FormArray(
       [
         new FormGroup({
-          date: new FormControl<Date>(new Date(), {
-            nonNullable: true,
-            validators: Validators.required,
-          }),
+          date: new FormControl<Date>(
+            {
+              disabled: true,
+              value: new Date(),
+            },
+            {
+              nonNullable: true,
+              validators: Validators.required,
+            }
+          ),
           institution: new FormControl('', {
             nonNullable: true,
             validators: this.extendedSentenceValidators,
@@ -373,10 +379,16 @@ export class ResumeFormComponent {
 
   protected addCertification(): void {
     const newCertification: CertificationFormGroupT = new FormGroup({
-      date: new FormControl<Date>(new Date(), {
-        nonNullable: true,
-        validators: Validators.required,
-      }),
+      date: new FormControl<Date>(
+        {
+          disabled: true,
+          value: new Date(),
+        },
+        {
+          nonNullable: true,
+          validators: Validators.required,
+        }
+      ),
       institution: new FormControl('', {
         nonNullable: true,
         validators: this.extendedSentenceValidators,

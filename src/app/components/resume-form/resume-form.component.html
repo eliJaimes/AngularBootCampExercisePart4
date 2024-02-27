@@ -32,7 +32,7 @@
   </form>
 </div>
 
-<pre>{{ resumeForm.value | json }}</pre>
+<pre>{{ resumeForm.getRawValue() | json }}</pre>
 
 <!-- •••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
@@ -550,7 +550,7 @@
               matInput
               [max]="maxDate"
               [matDatepicker]="matDatepickerRef"
-              disabled
+              formControlName="date"
             />
             <mat-hint>{{ certificationDateHintLabel }}</mat-hint>
             <mat-datepicker-toggle
