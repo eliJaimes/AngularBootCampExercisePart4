@@ -9,6 +9,7 @@ import {
   ProfileT,
   SkillT,
 } from '../../entities/resumeForm.type';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -18,7 +19,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { JsonPipe, NgTemplateOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -78,6 +79,7 @@ type ResumeFormGroupT = FormGroup<{
     JsonPipe,
     MatButtonModule,
     MatDatepickerModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -90,8 +92,13 @@ type ResumeFormGroupT = FormGroup<{
   templateUrl: './resume-form.component.html',
 })
 export class ResumeFormComponent {
+  @ViewChild(MatAccordion, { static: true })
+  protected matAccordion!: MatAccordion;
+
   /* ••[2]•••••••••• Labels ••••••••••••••• */
 
+  protected expandAllLabel: string = 'Expand all';
+  protected collapseAllLabel: string = 'Collapse all';
   protected clearLabel: string = 'Clear';
   protected submitLabel: string = 'Submit';
 

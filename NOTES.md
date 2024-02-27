@@ -235,3 +235,11 @@ https://material.angular.io/components/datepicker/overview
 ## Fix issue on certifications date field
 
 - Sometimes Angular Material has edge cases. Currently seems like we can not disable user input on simple datepicker while we are using reactive forms. This could be a good artificial scenario to know the getRawValue method.
+
+## Add cosmetic enhancements
+
+https://material.angular.io/components/expansion/overview
+
+- Let's constraint our form according to the view port
+- Import MatDatepickerModule on ResumeFormComponent
+- Improve UI by allowing user to expand-collapse form sections
