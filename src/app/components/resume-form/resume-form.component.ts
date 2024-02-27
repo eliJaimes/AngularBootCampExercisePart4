@@ -1,14 +1,13 @@
 /* ••[1]••••••••••••••••••••••••• resume-form.component.ts •••••••••••••••••••••••••••••• */
 
 import {
-  CapabilityT,
-  CertificationT,
-  ContactT,
-  EducationT,
-  ExperienceT,
-  ProfileT,
-  SkillT,
-} from '../../entities/resumeForm.type';
+  CapabilityFormGroupT,
+  CertificationFormGroupT,
+  EducationFormGroupT,
+  ExperienceFormGroupT,
+  ResumeFormGroupT,
+  SkillFormControlT,
+} from './resume-form.type';
 import { Component, ViewChild } from '@angular/core';
 import {
   FormArray,
@@ -27,53 +26,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RESUME_FORM_LABELS } from './resume-form.labels';
-
-type ContactFormGroupT = FormGroup<{
-  name: FormControl<ContactT['name']>;
-  title: FormControl<ContactT['title']>;
-}>;
-
-type ProfileFormGroupT = FormGroup<{
-  description: FormControl<ProfileT['description']>;
-}>;
-
-type CapabilityFormGroupT = FormGroup<{
-  description: FormControl<CapabilityT['description']>;
-  title: FormControl<CapabilityT['title']>;
-}>;
-
-type SkillFormControlT = FormControl<SkillT>;
-
-type EducationFormGroupT = FormGroup<{
-  institution: FormControl<EducationT['institution']>;
-  title: FormControl<EducationT['title']>;
-}>;
-
-type CertificationFormGroupT = FormGroup<{
-  date: FormControl<CertificationT['date']>;
-  institution: FormControl<CertificationT['institution']>;
-  title: FormControl<CertificationT['title']>;
-}>;
-
-type ExperienceFormGroupT = FormGroup<{
-  company: FormControl<ExperienceT['company']>;
-  endDate: FormControl<ExperienceT['endDate']>;
-  project: FormControl<ExperienceT['project']>;
-  roleTitle: FormControl<ExperienceT['roleTitle']>;
-  skills: FormArray<SkillFormControlT>;
-  startDate: FormControl<ExperienceT['startDate']>;
-  technicalEnvironment: FormControl<ExperienceT['technicalEnvironment']>;
-}>;
-
-type ResumeFormGroupT = FormGroup<{
-  contact: ContactFormGroupT;
-  profile: ProfileFormGroupT;
-  capabilities: FormArray<CapabilityFormGroupT>;
-  skills: FormArray<SkillFormControlT>;
-  educations: FormArray<EducationFormGroupT>;
-  certifications: FormArray<CertificationFormGroupT>;
-  experiences: FormArray<ExperienceFormGroupT>;
-}>;
 
 @Component({
   imports: [

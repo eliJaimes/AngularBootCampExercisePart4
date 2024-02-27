@@ -247,3 +247,7 @@ https://material.angular.io/components/expansion/overview
 ## Refactor, isolate labels to a file
 
 - Lets create a file that contains all ResumeFormComponent labels
+
+## Refactor, isolate internal types to a file
+
+- Lets create a file that contains all ResumeFormComponent internal types
