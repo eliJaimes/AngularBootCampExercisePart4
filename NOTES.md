@@ -267,3 +267,7 @@ https://material.angular.io/components/expansion/overview
 ## Fix issues with form, inputs not clearing form model
 
 - When we clear the Angular Material Input we are not updating the form data, we need to fix it
+
+## Fix issues with form, not creating form initial state when reset
+
+- We need to destroy dynamically created items on the form to recreate initial state

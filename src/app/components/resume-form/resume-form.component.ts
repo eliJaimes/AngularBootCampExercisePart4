@@ -433,8 +433,52 @@ export class ResumeFormComponent {
 
   /* ••[2]•••••••••• Resume form ••••••••••••••• */
 
+  private recreateFormInitialState(): void {
+    while (this.resumeForm.controls.capabilities.length > 1) {
+      this.removeCapability(this.resumeForm.controls.capabilities.length - 1);
+    }
+    while (this.resumeForm.controls.skills.length > 1) {
+      this.removeSkill(this.resumeForm.controls.skills.length - 1);
+    }
+    while (this.resumeForm.controls.educations.length > 1) {
+      this.removeEducation(this.resumeForm.controls.educations.length - 1);
+    }
+    while (this.resumeForm.controls.certifications.length > 1) {
+      this.removeCertification(
+        this.resumeForm.controls.certifications.length - 1
+      );
+    }
+    let experienceIndex: number = this.resumeForm.controls.experiences.length;
+    while (experienceIndex > 1) {
+      while (
+        this.resumeForm.controls.experiences.at(experienceIndex - 1).controls
+          .skills.controls.length > 1
+      ) {
+        this.removeFromExperienceSkill(
+          experienceIndex - 1,
+          this.resumeForm.controls.experiences.at(experienceIndex - 1).controls
+            .skills.controls.length - 1
+        );
+      }
+      this.removeExperience(experienceIndex - 1);
+      experienceIndex = this.resumeForm.controls.experiences.length;
+    }
+
+    while (
+      this.resumeForm.controls.experiences.at(experienceIndex - 1).controls
+        .skills.controls.length > 1
+    ) {
+      this.removeFromExperienceSkill(
+        experienceIndex - 1,
+        this.resumeForm.controls.experiences.at(experienceIndex - 1).controls
+          .skills.controls.length - 1
+      );
+    }
+  }
+
   protected resetForm(): void {
     this.matAccordion.closeAll();
+    this.recreateFormInitialState();
     this.resumeForm.reset();
     this.matExpansionPanels.get(0)?.open();
   }
