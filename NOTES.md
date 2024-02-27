@@ -227,3 +227,7 @@ https://material.angular.io/components/datepicker/overview
 - Import MatDatepickerModule on ResumeFormComponent
 - On 'src\app\app.config.ts' add provideNativeDateAdapter
 - Replicate above steps to complete the certifications form
+
+## Reflect the ResumeForm for experiences pieces on the UI
+
+- Replicate above steps to complete the experiences form

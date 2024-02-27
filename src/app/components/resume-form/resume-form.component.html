@@ -24,10 +24,15 @@
     <!-- Certifications -->
     <ng-container [ngTemplateOutlet]="certificationsFieldsetRef"></ng-container>
 
+    <!-- Experiences -->
+    <ng-container [ngTemplateOutlet]="experiencesFieldsetRef"></ng-container>
+
     <!-- Form actions -->
     <ng-container [ngTemplateOutlet]="formActionsRef"></ng-container>
   </form>
 </div>
+
+<pre>{{ resumeForm.value | json }}</pre>
 
 <!-- •••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
@@ -460,8 +465,8 @@
       </button>
     </div>
 
-    @for (CertificationControl of resumeForm.controls.certifications.controls;
-    track CertificationControl) {
+    @for (certificationControl of resumeForm.controls.certifications.controls;
+    track certificationControl) {
 
     <fieldset
       class="Certification fieldset border-slate-700 mt-4"
@@ -568,6 +573,302 @@
             matTooltipPosition="above"
             type="button"
             (click)="removeCertification($index)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        }
+      </div>
+    </fieldset>
+    }
+  </fieldset>
+</ng-template>
+
+<!-- ••[3]••••• Experiences •••••••••• -->
+<ng-template #experiencesFieldsetRef [formGroup]="resumeForm">
+  <fieldset class="fieldset mt-4" formArrayName="experiences">
+    <legend class="legend">
+      {{ experiencesLabel }}
+    </legend>
+
+    <div class="flex justify-end">
+      <button
+        mat-mini-fab
+        color="accent"
+        matTooltip="{{ addExperienceLabel }}"
+        matTooltipPosition="above"
+        type="button"
+        (click)="addExperience()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    @for (experienceControl of resumeForm.controls.experiences.controls; track
+    experienceControl) {
+
+    <fieldset
+      class="experience fieldset border-slate-700 mt-4"
+      [formGroupName]="$index"
+    >
+      <legend class="font-normal capitalize px-2 text-slate-500">
+        {{ experienceLabel }} ◦ {{ $index + 1 }}
+      </legend>
+      <div class="flex">
+        <div class="flex-1">
+          <!-- Role title -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ experienceRoleTitleLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="roleTitle"
+              #experienceRoleTitleRef
+            />
+            @if (experienceRoleTitleRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="experienceRoleTitleRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.experiences.at($index).controls
+                        .roleTitle
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Company -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ experienceCompanyLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="company"
+              #experienceCompanyRef
+            />
+            @if (experienceCompanyRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="experienceCompanyRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.experiences.at($index).controls
+                        .company
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Project -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ experienceProjectLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="project"
+              #experienceProjectRef
+            />
+            @if (experienceProjectRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="experienceProjectRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.experiences.at($index).controls
+                        .project
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Start date - End date -->
+          <mat-form-field class="w-full">
+            <mat-label>First campaign</mat-label>
+            <mat-date-range-input
+              [rangePicker]="matDateRangePickerRef"
+              disabled
+            >
+              <input
+                matStartDate
+                placeholder="{{ experienceStartDateLabel }}"
+                formControlName="startDate"
+              />
+              <input
+                matEndDate
+                placeholder="{{ experienceEndDateLabel }}"
+                formControlName="endDate"
+              />
+            </mat-date-range-input>
+            <mat-hint
+              >{{ experienceDateHintLabel }} -
+              {{ experienceDateHintLabel }}</mat-hint
+            >
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="matDateRangePickerRef"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker
+              #matDateRangePickerRef
+              startView="multi-year"
+              disabled="false"
+            ></mat-date-range-picker>
+          </mat-form-field>
+          <!-- Technical environment -->
+          <mat-form-field class="w-full" color="primary">
+            <mat-label>{{ experienceTechnicalEnvironmentLabel }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="technicalEnvironment"
+              #experienceTechnicalEnvironmentRef
+            />
+            @if (experienceTechnicalEnvironmentRef.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              matTooltip="{{ clearLabel }}"
+              matTooltipPosition="above"
+              (click)="experienceTechnicalEnvironmentRef.value = ''"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+            }
+            <mat-error>
+              <ng-container
+                *ngTemplateOutlet="
+                  formErrorsRef;
+                  context: {
+                    $implicit:
+                      resumeForm.controls.experiences.at($index).controls
+                        .technicalEnvironment
+                  }
+                "
+              ></ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Skills -->
+          <fieldset
+            class="experience fieldset border-slate-700 mt-2"
+            formArrayName="skills"
+          >
+            <legend class="font-normal capitalize px-2 text-slate-500">
+              {{ experienceSkillsLabel }}
+            </legend>
+            <div class="flex justify-end">
+              <button
+                mat-mini-fab
+                color="accent"
+                matTooltip="{{ addSkillToExperienceLabel }}"
+                matTooltipPosition="above"
+                type="button"
+                (click)="addSkillToExperience($index)"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+
+            @for (skillOnExperienceControl of
+            resumeForm.controls.experiences.at($index).controls.skills.controls;
+            track skillOnExperienceControl; let $skillIndex = $index) {
+
+            <div class="flex mt-4" [class.mt-6]="$first">
+              <div class="flex-1">
+                <!-- Skill -->
+                <mat-form-field class="w-full" color="primary">
+                  <mat-label>{{ experienceSkillLabel }}</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [formControlName]="$skillIndex"
+                    #experienceSkillRef
+                  />
+                  @if (experienceSkillRef.value) {
+                  <button
+                    matSuffix
+                    mat-icon-button
+                    matTooltip="{{ clearLabel }}"
+                    matTooltipPosition="above"
+                    (click)="experienceSkillRef.value = ''"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  }
+                  <mat-error>
+                    <ng-container
+                      *ngTemplateOutlet="
+                        formErrorsRef;
+                        context: {
+                          $implicit: resumeForm.controls.experiences
+                            .at($index)
+                            .controls.skills.at($skillIndex)
+                        }
+                      "
+                    ></ng-container>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              @if ($count > 1) {
+              <div class="ml-4">
+                <button
+                  mat-mini-fab
+                  color="primary"
+                  matTooltip="{{ removeSkillLabel }}"
+                  matTooltipPosition="above"
+                  type="button"
+                  (click)="removeFromExperienceSkill($index, $skillIndex)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              }
+            </div>
+
+            }
+          </fieldset>
+        </div>
+        @if ($count > 1) {
+        <div class="ml-4">
+          <button
+            mat-mini-fab
+            color="primary"
+            matTooltip="{{ removeExperienceLabel }}"
+            matTooltipPosition="above"
+            type="button"
+            (click)="removeExperience($index)"
           >
             <mat-icon>delete</mat-icon>
           </button>

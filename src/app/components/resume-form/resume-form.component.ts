@@ -5,6 +5,7 @@ import {
   CertificationT,
   ContactT,
   EducationT,
+  ExperienceT,
   ProfileT,
   SkillT,
 } from '../../entities/resumeForm.type';
@@ -16,6 +17,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -23,7 +25,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgTemplateOutlet } from '@angular/common';
 
 type ContactFormGroupT = FormGroup<{
   name: FormControl<ContactT['name']>;
@@ -52,6 +53,16 @@ type CertificationFormGroupT = FormGroup<{
   title: FormControl<CertificationT['title']>;
 }>;
 
+type ExperienceFormGroupT = FormGroup<{
+  company: FormControl<ExperienceT['company']>;
+  endDate: FormControl<ExperienceT['endDate']>;
+  project: FormControl<ExperienceT['project']>;
+  roleTitle: FormControl<ExperienceT['roleTitle']>;
+  skills: FormArray<SkillFormControlT>;
+  startDate: FormControl<ExperienceT['startDate']>;
+  technicalEnvironment: FormControl<ExperienceT['technicalEnvironment']>;
+}>;
+
 type ResumeFormGroupT = FormGroup<{
   contact: ContactFormGroupT;
   profile: ProfileFormGroupT;
@@ -59,10 +70,12 @@ type ResumeFormGroupT = FormGroup<{
   skills: FormArray<SkillFormControlT>;
   educations: FormArray<EducationFormGroupT>;
   certifications: FormArray<CertificationFormGroupT>;
+  experiences: FormArray<ExperienceFormGroupT>;
 }>;
 
 @Component({
   imports: [
+    JsonPipe,
     MatButtonModule,
     MatDatepickerModule,
     MatFormFieldModule,
@@ -141,6 +154,27 @@ export class ResumeFormComponent {
   protected certificationInstitutionLabel: string = 'Institution';
   protected certificationTitleLabel: string = 'Title';
 
+  /* ••[3]••••• Experiences •••••••••• */
+
+  protected addExperienceLabel: string = 'Add experience';
+  protected removeExperienceLabel: string = 'Remove experience';
+  protected addSkillToExperienceLabel: string = 'Add skill to experience';
+  protected removeSkillFromExperienceLabel: string =
+    'Remove skill from experience';
+
+  protected experiencesLabel: string = 'Experiences';
+  protected experienceLabel: string = 'Experience';
+  protected experienceDateHintLabel: string = 'MM/DD/YYYY';
+  protected experienceCompanyLabel: string = 'Company';
+  protected experienceEndDateLabel: string = 'End date';
+  protected experienceProjectLabel: string = 'Project';
+  protected experienceRoleTitleLabel: string = 'Role title';
+  protected experienceSkillsLabel: string = 'Skills';
+  protected experienceSkillLabel: string = 'Skill';
+  protected experienceStartDateLabel: string = 'Start date';
+  protected experienceTechnicalEnvironmentLabel: string =
+    'Technical environment';
+
   private sentenceValidators: Array<ValidatorFn> = [
     Validators.required,
     Validators.minLength(3),
@@ -210,6 +244,46 @@ export class ResumeFormComponent {
           title: new FormControl('', {
             nonNullable: true,
             validators: this.sentenceValidators,
+          }),
+        }),
+      ],
+      Validators.minLength(1)
+    ),
+    experiences: new FormArray(
+      [
+        new FormGroup({
+          company: new FormControl('', {
+            nonNullable: true,
+            validators: this.extendedSentenceValidators,
+          }),
+          endDate: new FormControl<Date>(new Date(), {
+            nonNullable: true,
+            validators: Validators.required,
+          }),
+          project: new FormControl('', {
+            nonNullable: true,
+            validators: this.extendedSentenceValidators,
+          }),
+          roleTitle: new FormControl('', {
+            nonNullable: true,
+            validators: this.sentenceValidators,
+          }),
+          skills: new FormArray(
+            [
+              new FormControl('', {
+                nonNullable: true,
+                validators: this.sentenceValidators,
+              }),
+            ],
+            Validators.minLength(1)
+          ),
+          startDate: new FormControl<Date>(new Date(), {
+            nonNullable: true,
+            validators: Validators.required,
+          }),
+          technicalEnvironment: new FormControl('', {
+            nonNullable: true,
+            validators: this.extendedSentenceValidators,
           }),
         }),
       ],
@@ -316,11 +390,86 @@ export class ResumeFormComponent {
     this.resumeForm.controls.certifications.push(newCertification);
   }
 
-  protected removeCertification(CertificationIndex: number): void {
+  protected removeCertification(certificationIndex: number): void {
     if (this.resumeForm.controls.certifications.controls.length > 1) {
-      this.resumeForm.controls.certifications.removeAt(CertificationIndex);
+      this.resumeForm.controls.certifications.removeAt(certificationIndex);
     }
   }
+
+  /* ••[2]•••••••••• Experiences ••••••••••••••• */
+
+  protected addExperience(): void {
+    const newExperience: ExperienceFormGroupT = new FormGroup({
+      company: new FormControl('', {
+        nonNullable: true,
+        validators: this.extendedSentenceValidators,
+      }),
+      endDate: new FormControl<Date>(new Date(), {
+        nonNullable: true,
+        validators: Validators.required,
+      }),
+      project: new FormControl('', {
+        nonNullable: true,
+        validators: this.extendedSentenceValidators,
+      }),
+      roleTitle: new FormControl('', {
+        nonNullable: true,
+        validators: this.sentenceValidators,
+      }),
+      skills: new FormArray(
+        [
+          new FormControl('', {
+            nonNullable: true,
+            validators: this.sentenceValidators,
+          }),
+        ],
+        Validators.minLength(1)
+      ),
+      startDate: new FormControl<Date>(new Date(), {
+        nonNullable: true,
+        validators: Validators.required,
+      }),
+      technicalEnvironment: new FormControl('', {
+        nonNullable: true,
+        validators: this.extendedSentenceValidators,
+      }),
+    });
+
+    this.resumeForm.controls.experiences.push(newExperience);
+  }
+
+  protected removeExperience(experienceIndex: number): void {
+    if (this.resumeForm.controls.experiences.controls.length > 1) {
+      this.resumeForm.controls.experiences.removeAt(experienceIndex);
+    }
+  }
+
+  protected addSkillToExperience(experienceIndex: number): void {
+    const newSkillToExperience: SkillFormControlT = new FormControl('', {
+      nonNullable: true,
+      validators: this.sentenceValidators,
+    });
+
+    this.resumeForm.controls.experiences
+      .at(experienceIndex)
+      .controls.skills.push(newSkillToExperience);
+  }
+
+  protected removeFromExperienceSkill(
+    experienceIndex: number,
+    skillIndex: number
+  ): void {
+    if (
+      this.resumeForm.controls.experiences.at(experienceIndex).controls.skills
+        .length > 1
+    ) {
+      this.resumeForm.controls.experiences
+        .at(experienceIndex)
+        .controls.skills.removeAt(skillIndex);
+    }
+  }
+
+  /* ••[2]•••••••••• Resume form ••••••••••••••• */
 
   protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {
     console.log('%c\nonSubmit', 'color: SpringGreen');
