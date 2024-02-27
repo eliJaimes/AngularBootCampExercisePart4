@@ -163,6 +163,8 @@ export class ResumeFormComponent {
         .at(capabilityIndex)
         ?.setValue(capability);
     }
+
+    this.resumeForm.controls.capabilities.updateValueAndValidity();
   }
 
   protected addCapability(): void {
@@ -196,6 +198,8 @@ export class ResumeFormComponent {
     } else {
       this.resumeForm.controls.skills.at(skillIndex)?.setValue(skill);
     }
+
+    this.resumeForm.controls.skills.updateValueAndValidity();
   }
 
   protected addSkill(): void {
@@ -237,6 +241,8 @@ export class ResumeFormComponent {
         .at(educationIndex)
         ?.setValue(education);
     }
+
+    this.resumeForm.controls.educations.updateValueAndValidity();
   }
 
   protected addEducation(): void {
@@ -289,6 +295,8 @@ export class ResumeFormComponent {
         .at(certificationIndex)
         ?.setValue(certification);
     }
+
+    this.resumeForm.controls.certifications.updateValueAndValidity();
   }
 
   protected addCertification(): void {
@@ -371,6 +379,8 @@ export class ResumeFormComponent {
         );
       }
     );
+
+    this.resumeForm.controls.experiences.updateValueAndValidity();
   }
 
   protected addExperience(): void {
@@ -409,6 +419,10 @@ export class ResumeFormComponent {
         .controls.skills.at(skillToExperienceIndex)
         ?.setValue(skillToExperience);
     }
+
+    this.resumeForm.controls.experiences
+      .at(experienceIndex)
+      .controls.skills.updateValueAndValidity();
   }
 
   protected addSkillToExperience(experienceIndex: number): void {
