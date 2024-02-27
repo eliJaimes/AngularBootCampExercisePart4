@@ -93,7 +93,7 @@
   </form>
 </div>
 
-<pre>{{ resumeForm.getRawValue() | json }}</pre>
+<pre class="text-wrap">{{ resumeForm.getRawValue() | json }}</pre>
 
 <!-- •••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 
@@ -968,7 +968,28 @@
 
 <!-- ••[3]••••• Form actions •••••••••• -->
 <ng-template #formActionsRef>
-  <div class="mt-4 flex justify-end">
+  <div class="mt-4 flex">
+    <div class="saving-actions flex-1 flex">
+      <button
+        class="mr-4"
+        mat-stroked-button
+        color="primary"
+        type="button"
+        (click)="resetForm()"
+      >
+        <mat-icon class="mr-4">restart_alt</mat-icon>
+        {{ label.reset }}
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        type="button"
+        (click)="loadTestData()"
+      >
+        <mat-icon class="mr-4">science</mat-icon>
+        {{ label.loadTestData }}
+      </button>
+    </div>
     <button
       mat-raised-button
       color="accent"

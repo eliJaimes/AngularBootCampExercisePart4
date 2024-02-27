@@ -257,3 +257,9 @@ https://material.angular.io/components/expansion/overview
 - Let's reuse code where we can on ResumeFormComponent class
 
 - Note: we should reduce ResumeFormComponent template, we can achieve this by creating multiple small components that handle the UI. However when involving a form, this enhance involve several advance concepts outside the context of this course.
+
+## Add temporary save functionality
+
+- Lets create some functionality to reset the form
+- Lets create some functionality to load test data as developer helper functionality. We will remove this at some point.
+- Comment Validators.pattern from sentenceValidators and extendedSentenceValidators properties, you can enable with a better regex pattern when you needed

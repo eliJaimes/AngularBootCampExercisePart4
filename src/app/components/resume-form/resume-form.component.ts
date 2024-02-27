@@ -1,6 +1,15 @@
 /* ••[1]••••••••••••••••••••••••• resume-form.component.ts •••••••••••••••••••••••••••••• */
 
 import {
+  CAPABILITIES,
+  CERTIFICATIONS,
+  CONTACT,
+  EDUCATIONS,
+  EXPERIENCES,
+  PROFILE,
+  SKILLS,
+} from './resume-form.data';
+import {
   CapabilityFormGroupT,
   CertificationFormGroupT,
   EducationFormGroupT,
@@ -8,7 +17,14 @@ import {
   ResumeFormGroupT,
   SkillFormControlT,
 } from './resume-form.type';
-import { Component, ViewChild } from '@angular/core';
+import {
+  CapabilityT,
+  CertificationT,
+  EducationT,
+  ExperienceT,
+  SkillT,
+} from '../../entities/resumeForm.type';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -18,7 +34,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { JsonPipe, NgTemplateOutlet } from '@angular/common';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import {
+  MatAccordion,
+  MatExpansionModule,
+  MatExpansionPanel,
+} from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,6 +68,9 @@ export class ResumeFormComponent {
   @ViewChild(MatAccordion, { static: true })
   protected matAccordion!: MatAccordion;
 
+  @ViewChildren(MatExpansionPanel)
+  protected matExpansionPanels!: QueryList<MatExpansionPanel>;
+
   /* ••[2]•••••••••• Labels ••••••••••••••• */
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -64,13 +87,13 @@ export class ResumeFormComponent {
   private sentenceValidators: Array<ValidatorFn> = [
     Validators.required,
     Validators.minLength(3),
-    Validators.pattern(/^[\w]+$/),
+    // Validators.pattern(/^[\w ]+$/),
   ];
 
   private extendedSentenceValidators: Array<ValidatorFn> = [
     Validators.required,
     Validators.minLength(3),
-    Validators.pattern(/^[\w,.]+$/),
+    // Validators.pattern(/^[\w,. ]+$/),
   ];
 
   protected maxDate: Date = new Date();
@@ -126,6 +149,22 @@ export class ResumeFormComponent {
     });
   }
 
+  private createCapability(
+    capability: CapabilityT,
+    capabilityIndex: number,
+    append: boolean = true
+  ): void {
+    if (append) {
+      const newCapability: CapabilityFormGroupT = this.getNewCapability();
+      newCapability.setValue(capability);
+      this.resumeForm.controls.capabilities.controls.push(newCapability);
+    } else {
+      this.resumeForm.controls.capabilities.controls
+        .at(capabilityIndex)
+        ?.setValue(capability);
+    }
+  }
+
   protected addCapability(): void {
     this.resumeForm.controls.capabilities.push(this.getNewCapability());
   }
@@ -137,11 +176,26 @@ export class ResumeFormComponent {
   }
 
   /* ••[2]•••••••••• Skills ••••••••••••••• */
+
   private getNewSkill(): SkillFormControlT {
     return new FormControl('', {
       nonNullable: true,
       validators: this.sentenceValidators,
     });
+  }
+
+  private createSkill(
+    skill: SkillT,
+    skillIndex: number,
+    append: boolean = true
+  ): void {
+    if (append) {
+      const newSkill: SkillFormControlT = this.getNewSkill();
+      newSkill.setValue(skill);
+      this.resumeForm.controls.skills.push(newSkill);
+    } else {
+      this.resumeForm.controls.skills.at(skillIndex)?.setValue(skill);
+    }
   }
 
   protected addSkill(): void {
@@ -167,6 +221,22 @@ export class ResumeFormComponent {
         validators: this.sentenceValidators,
       }),
     });
+  }
+
+  private createEducation(
+    education: EducationT,
+    educationIndex: number,
+    append: boolean = true
+  ): void {
+    if (append) {
+      const newEducation: EducationFormGroupT = this.getNewEducation();
+      newEducation.setValue(education);
+      this.resumeForm.controls.educations.controls.push(newEducation);
+    } else {
+      this.resumeForm.controls.educations.controls
+        .at(educationIndex)
+        ?.setValue(education);
+    }
   }
 
   protected addEducation(): void {
@@ -202,6 +272,23 @@ export class ResumeFormComponent {
         validators: this.sentenceValidators,
       }),
     });
+  }
+
+  private createCertification(
+    certification: CertificationT,
+    certificationIndex: number,
+    append: boolean = true
+  ): void {
+    if (append) {
+      const newCertification: CertificationFormGroupT =
+        this.getNewCertification();
+      newCertification.setValue(certification);
+      this.resumeForm.controls.certifications.controls.push(newCertification);
+    } else {
+      this.resumeForm.controls.certifications.controls
+        .at(certificationIndex)
+        ?.setValue(certification);
+    }
   }
 
   protected addCertification(): void {
@@ -249,6 +336,43 @@ export class ResumeFormComponent {
     });
   }
 
+  private createExperience(
+    experience: ExperienceT,
+    experienceIndex: number,
+    append: boolean = true
+  ): void {
+    const experienceWithoutSkills: Omit<ExperienceT, 'skills'> = Object.assign(
+      {},
+      experience,
+      { skills: null }
+    );
+
+    if (append) {
+      const newExperienceWithoutSkills: ExperienceFormGroupT =
+        this.getNewExperience();
+      newExperienceWithoutSkills.patchValue(experienceWithoutSkills);
+
+      this.resumeForm.controls.experiences.controls.push(
+        newExperienceWithoutSkills
+      );
+    } else {
+      this.resumeForm.controls.experiences.controls
+        .at(experienceIndex)
+        ?.patchValue(experienceWithoutSkills);
+    }
+
+    experience.skills.forEach(
+      (skillToExperience: SkillT, skillToExperienceIndex: number): void => {
+        this.createSkillToExperience(
+          skillToExperience,
+          skillToExperienceIndex,
+          experienceIndex,
+          skillToExperienceIndex !== 0
+        );
+      }
+    );
+  }
+
   protected addExperience(): void {
     this.resumeForm.controls.experiences.push(this.getNewExperience());
   }
@@ -264,6 +388,27 @@ export class ResumeFormComponent {
       nonNullable: true,
       validators: this.sentenceValidators,
     });
+  }
+
+  private createSkillToExperience(
+    skillToExperience: SkillT,
+    skillToExperienceIndex: number,
+    experienceIndex: number,
+    append: boolean = true
+  ): void {
+    if (append) {
+      const newSkillToExperience: SkillFormControlT = this.getNewSkill();
+      newSkillToExperience.setValue(skillToExperience);
+
+      this.resumeForm.controls.experiences
+        .at(experienceIndex)
+        .controls.skills.push(newSkillToExperience);
+    } else {
+      this.resumeForm.controls.experiences
+        .at(experienceIndex)
+        .controls.skills.at(skillToExperienceIndex)
+        ?.setValue(skillToExperience);
+    }
   }
 
   protected addSkillToExperience(experienceIndex: number): void {
@@ -287,6 +432,64 @@ export class ResumeFormComponent {
   }
 
   /* ••[2]•••••••••• Resume form ••••••••••••••• */
+
+  protected resetForm(): void {
+    this.matAccordion.closeAll();
+    this.resumeForm.reset();
+    this.matExpansionPanels.get(0)?.open();
+  }
+
+  protected loadTestData(): void {
+    this.resetForm();
+    this.matAccordion.openAll();
+
+    this.resumeForm.patchValue({
+      contact: CONTACT,
+      profile: PROFILE,
+    });
+
+    CAPABILITIES.forEach(
+      (capability: CapabilityT, capabilityIndex: number): void => {
+        this.createCapability(
+          capability,
+          capabilityIndex,
+          capabilityIndex !== 0
+        );
+      }
+    );
+
+    SKILLS.forEach((skill: SkillT, skillIndex: number): void => {
+      this.createSkill(skill, skillIndex, skillIndex !== 0);
+    });
+
+    EDUCATIONS.forEach(
+      (education: EducationT, educationIndex: number): void => {
+        this.createEducation(education, educationIndex, educationIndex !== 0);
+      }
+    );
+
+    CERTIFICATIONS.forEach(
+      (certification: CertificationT, certificationIndex: number): void => {
+        this.createCertification(
+          certification,
+          certificationIndex,
+          certificationIndex !== 0
+        );
+      }
+    );
+
+    EXPERIENCES.forEach(
+      (experience: ExperienceT, experienceIndex: number): void => {
+        this.createExperience(
+          experience,
+          experienceIndex,
+          experienceIndex !== 0
+        );
+      }
+    );
+
+    this.resumeForm.updateValueAndValidity();
+  }
 
   protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {
     console.log('%c\nonSubmit', 'color: SpringGreen');

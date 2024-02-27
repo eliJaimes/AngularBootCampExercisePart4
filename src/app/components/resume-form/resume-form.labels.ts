@@ -6,6 +6,8 @@ export const RESUME_FORM_LABELS: Record<string, string> = {
   expandAll: 'Expand all',
   collapseAll: 'Collapse all',
   clear: 'Clear',
+  loadTestData: 'Load test data',
+  reset: 'Reset',
   submit: 'Submit',
   requiredErrorField: 'This field is required',
   patternErrorField: 'Invalid character on this field',
