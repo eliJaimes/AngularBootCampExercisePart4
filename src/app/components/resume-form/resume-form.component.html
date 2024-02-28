@@ -1047,7 +1047,7 @@
         mat-stroked-button
         color="primary"
         type="button"
-        (click)="resetForm()"
+        (click)="triggerResetForm()"
       >
         <mat-icon class="mr-4">restart_alt</mat-icon>
         {{ label.reset }}
@@ -1058,7 +1058,7 @@
         class="mr-4"
         color="primary"
         type="button"
-        (click)="loadTestData()"
+        (click)="triggerLoadTestData()"
       >
         <mat-icon class="mr-4">science</mat-icon>
         {{ label.loadTestData }}
@@ -1069,7 +1069,7 @@
         class="mr-4"
         color="primary"
         type="button"
-        (click)="loadForm()"
+        (click)="triggerLoadForm()"
       >
         <mat-icon class="mr-4">cloud_download</mat-icon>
         {{ label.load }}
@@ -1080,7 +1080,7 @@
         class="mr-4"
         color="primary"
         type="button"
-        (click)="saveForm()"
+        (click)="triggerSaveForm()"
       >
         <mat-icon class="mr-4">cloud_upload</mat-icon>
         {{ label.save }}

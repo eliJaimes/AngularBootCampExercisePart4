@@ -16,7 +16,13 @@ import {
   ResumeFormT,
   SkillT,
 } from '../../entities/resumeForm.type';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  inject,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -31,6 +37,10 @@ import {
   MatExpansionModule,
   MatExpansionPanel,
 } from '@angular/material/expansion';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogDataT } from '../../entities/confirmationDialogData.type';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -42,6 +52,7 @@ import { RESUME_FORM_TEST_VALUE } from './resume-form.data';
 
 @Component({
   imports: [
+    ConfirmationDialogComponent,
     JsonPipe,
     MatButtonModule,
     MatDatepickerModule,
@@ -49,6 +60,7 @@ import { RESUME_FORM_TEST_VALUE } from './resume-form.data';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSnackBarModule,
     MatTooltipModule,
     NgTemplateOutlet,
     ReactiveFormsModule,
@@ -126,6 +138,9 @@ export class ResumeFormComponent {
     }),
     skills: new FormArray([this.getNewSkill()], Validators.minLength(1)),
   });
+
+  private matDialog: MatDialog = inject(MatDialog);
+  private matSnackBar: MatSnackBar = inject(MatSnackBar);
 
   /* ••[2]•••••••••• Capabilities ••••••••••••••• */
 
@@ -440,6 +455,12 @@ export class ResumeFormComponent {
 
   /* ••[2]•••••••••• Resume form ••••••••••••••• */
 
+  private triggerMatSnackBar(message: string): void {
+    this.matSnackBar.open(message, undefined, {
+      duration: 3000,
+    });
+  }
+
   private recreateFormInitialState(): void {
     while (this.resumeForm.controls.capabilities.length > 1) {
       this.removeCapability(this.resumeForm.controls.capabilities.length - 1);
@@ -483,11 +504,36 @@ export class ResumeFormComponent {
     }
   }
 
-  protected resetForm(): void {
+  private resetForm(): void {
     this.matAccordion.closeAll();
     this.recreateFormInitialState();
     this.resumeForm.reset();
     this.matExpansionPanels.get(0)?.open();
+  }
+
+  protected triggerResetForm(): void {
+    const matDialogRef: MatDialogRef<ConfirmationDialogComponent, boolean> =
+      this.matDialog.open<ConfirmationDialogComponent, ConfirmationDialogDataT>(
+        ConfirmationDialogComponent,
+        {
+          data: {
+            content: this.label.resetContent,
+            icon: 'restart_alt',
+            title: this.label.resetTitle,
+          },
+          width: '400px',
+        }
+      );
+
+    matDialogRef
+      .afterClosed()
+      /* NOTE: this observable completes after emission */
+      .subscribe((dialogResponse: boolean | undefined): void => {
+        if (dialogResponse) {
+          this.resetForm();
+          this.triggerMatSnackBar(this.label.resetExecuted);
+        }
+      });
   }
 
   private loadData(resumeFormValue: ResumeFormT): void {
@@ -544,11 +590,31 @@ export class ResumeFormComponent {
     this.resumeForm.updateValueAndValidity();
   }
 
-  protected loadTestData(): void {
-    this.loadData(RESUME_FORM_TEST_VALUE);
+  protected triggerLoadTestData(): void {
+    const matDialogRef: MatDialogRef<ConfirmationDialogComponent, boolean> =
+      this.matDialog.open<ConfirmationDialogComponent, ConfirmationDialogDataT>(
+        ConfirmationDialogComponent,
+        {
+          data: {
+            content: this.label.loadTestDataContent,
+            icon: 'science',
+            title: this.label.loadTestDataTitle,
+          },
+          width: '400px',
+        }
+      );
+
+    matDialogRef
+      .afterClosed()
+      .subscribe((dialogResponse: boolean | undefined): void => {
+        if (dialogResponse) {
+          this.loadData(RESUME_FORM_TEST_VALUE);
+          this.triggerMatSnackBar(this.label.loadTestDataExecuted);
+        }
+      });
   }
 
-  protected loadForm(): void {
+  private loadForm(): void {
     try {
       const resumeFormValue: ResumeFormT = JSON.parse(
         localStorage.getItem('resumeFormValue') as string
@@ -556,18 +622,66 @@ export class ResumeFormComponent {
 
       if (resumeFormValue) {
         this.loadData(resumeFormValue);
+        this.triggerMatSnackBar(this.label.loadFormExecuted);
       } else {
-        console.error('resumeFormValue is null');
+        this.triggerMatSnackBar(this.label.savedDataUnavailable);
       }
     } catch (error) {
-      console.error('Error when parsing resumeFormValue');
+      this.triggerMatSnackBar(this.label.errorWhileLoadingSavedData);
     }
   }
 
-  protected saveForm(): void {
+  protected triggerLoadForm(): void {
+    const matDialogRef: MatDialogRef<ConfirmationDialogComponent, boolean> =
+      this.matDialog.open<ConfirmationDialogComponent, ConfirmationDialogDataT>(
+        ConfirmationDialogComponent,
+        {
+          data: {
+            content: this.label.loadFormContent,
+            icon: 'cloud_download',
+            title: this.label.loadFormTitle,
+          },
+          width: '400px',
+        }
+      );
+
+    matDialogRef
+      .afterClosed()
+      .subscribe((dialogResponse: boolean | undefined): void => {
+        if (dialogResponse) {
+          this.loadForm();
+        }
+      });
+  }
+
+  private saveForm(): void {
     const resumeFormValue: ResumeFormT = this.resumeForm.getRawValue();
 
     localStorage.setItem('resumeFormValue', JSON.stringify(resumeFormValue));
+    this.triggerMatSnackBar(this.label.saveFormExecuted);
+  }
+
+  protected triggerSaveForm(): void {
+    const matDialogRef: MatDialogRef<ConfirmationDialogComponent, boolean> =
+      this.matDialog.open<ConfirmationDialogComponent, ConfirmationDialogDataT>(
+        ConfirmationDialogComponent,
+        {
+          data: {
+            content: this.label.saveFormContent,
+            icon: 'cloud_upload',
+            title: this.label.saveFormTitle,
+          },
+          width: '400px',
+        }
+      );
+
+    matDialogRef
+      .afterClosed()
+      .subscribe((dialogResponse: boolean | undefined): void => {
+        if (dialogResponse) {
+          this.saveForm();
+        }
+      });
   }
 
   protected onSubmit(_event: SubmitEvent, _form: ResumeFormGroupT): void {

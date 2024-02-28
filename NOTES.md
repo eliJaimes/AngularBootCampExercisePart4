@@ -81,7 +81,7 @@ https://tailwindcss.com/docs/customizing-colors#using-the-default-colors
 - Note: we will no create modules anymore, since v15 on Angular, you can create Stand Alone components
 
 ```shell
-ng generate component components/resumeForm --module home --skip-tests --style none --dry-run
+ng generate component components/resumeForm --skip-tests --style none --dry-run
 ```
 
 - Import ResumeFormComponent on AppComponent imports array
@@ -277,3 +277,22 @@ https://material.angular.io/components/expansion/overview
 - Add save functionality
 - Add load functionality while refactoring loadTestData method
 - Fix clear input buttons, since we do not declare them as type button
+
+## Improve UI with dialogs and toast messages
+
+https://material.angular.io/components/dialog/overview
+https://material.angular.io/components/snack-bar/overview
+
+- Create a confirmationDialog component
+
+```shell
+ng generate component components/confirmationDialog --skip-tests --style none --dry-run
+```
+
+- Import MatDialogModule on ConfirmationDialogComponent
+- Import MatButtonModule on ConfirmationDialogComponent
+- Create a ConfirmationDialogDataT type on 'src\app\entities\confirmationDialogData.type.ts'
+- On ConfirmationDialogComponent inject MAT_DIALOG_DATA typed as ConfirmationDialogDataT
+- Update ConfirmationDialogComponent template using data properties
+- Import ConfirmationDialogComponent on ResumeFormComponent
+- Inject MatDialog class on ResumeFormComponent

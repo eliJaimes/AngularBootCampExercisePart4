@@ -1,0 +1,22 @@
+<!-- ••[1]••••••••••••••••••••••••• confirmation-dialog.component.html •••••••••••••••••••••••••••••• -->
+
+<h2 mat-dialog-title>
+  <mat-icon class="mr-4 align-middle" color="primary">{{ data.icon }}</mat-icon>
+  {{ data.title | uppercase }}
+</h2>
+<mat-dialog-content>{{ data.content }}</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="flex justify-end flex-1">
+    <button mat-button color="primary" [mat-dialog-close]="false">
+      {{ noLabel }}
+    </button>
+    <button
+      mat-button
+      color="primary"
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+    >
+      {{ yesLabel }}
+    </button>
+  </div>
+</mat-dialog-actions>
