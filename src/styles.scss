@@ -122,6 +122,7 @@ body {
 }
 
 body {
+	--color-invert: #{mat.get-theme-color($exercise-part4-dark-theme, foreground, text)};
 	--divider: #{mat.get-theme-color($exercise-part4-light-theme, foreground, divider)};
 	--primary: #{mat.get-theme-color($exercise-part4-light-theme, primary, default)};
 	--accent: #{mat.get-theme-color($exercise-part4-light-theme, accent, default)};
@@ -162,6 +163,7 @@ body {
 
 
 	&.dark {
+		--color-invert: #{mat.get-theme-color($exercise-part4-light-theme, foreground, text)};
 		--divider: #{mat.get-theme-color($exercise-part4-dark-theme, foreground, divider)};
 		--primary: #{mat.get-theme-color($exercise-part4-dark-theme, primary, default)};
 		--accent: #{mat.get-theme-color($exercise-part4-dark-theme, accent, default)};
@@ -174,7 +176,6 @@ body {
 		background: mat.get-theme-color($exercise-part4-dark-theme, background, background);
 		color: mat.get-theme-color($exercise-part4-dark-theme, foreground, text);
 	}
-	;
 }
 
 @tailwind base;

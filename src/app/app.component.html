@@ -2,14 +2,25 @@
 
 <div class="app-root pb-5">
   <mat-toolbar color="primary">
-    <span class="flex-1">{{ titleLabel }}</span>
+    <img
+      class="w-24 mr-10"
+      [src]="
+        isDarkTheme
+          ? './../assets/apexLogoDark.png'
+          : './../assets/apexLogoLight.png'
+      "
+    />
+    <span class="flex-1 text-sm sm:text-lg">{{ titleLabel }}</span>
     <mat-slide-toggle
       color="primary"
       checked
       hideIcon
       labelPosition="before"
       (change)="themeChangeHandler($event)"
-      >{{ themeToggleLabel }}
+    >
+      <span class="text-color-invert text-xs sm:text-sm">
+        {{ themeToggleLabel }}
+      </span>
     </mat-slide-toggle>
   </mat-toolbar>
 

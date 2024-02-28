@@ -296,3 +296,9 @@ ng generate component components/confirmationDialog --skip-tests --style none --
 - Update ConfirmationDialogComponent template using data properties
 - Import ConfirmationDialogComponent on ResumeFormComponent
 - Inject MatDialog class on ResumeFormComponent
+
+## Add company logo and final touches
+
+- Fix text color on theme switcher
+- Add company logo depending on the theme
+- Fix ResumeFormComponent action form buttons

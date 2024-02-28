@@ -24,6 +24,8 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent implements OnInit {
   protected titleLabel: string = 'Apex • MDC Resume Generator';
 
+  protected isDarkTheme: boolean = true;
+
   protected themeToggleLabel: string = 'Dark theme:';
 
   public constructor(
@@ -41,5 +43,7 @@ export class AppComponent implements OnInit {
     } else {
       this.renderer2.removeClass(this.document.body, 'dark');
     }
+
+    this.isDarkTheme = !this.isDarkTheme;
   }
 }

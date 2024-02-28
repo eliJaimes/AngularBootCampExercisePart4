@@ -27,6 +27,7 @@ module.exports = {
   theme: {
     colors: {
       accent: "var(--accent)",
+      "color-invert": "var(--color-invert)",
       divider: "var(--divider)",
       primary: "var(--primary)",
       slate: colors.slate,
